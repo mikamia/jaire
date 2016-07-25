@@ -1,0 +1,19 @@
+<section id="products">
+  <h4>Products</h4>
+  <div class="row">
+    <div ng-repeat="product in products" class="col-xs-4">
+      <a class="thumbnail">
+        <img ng-src="{{ product.imageUrl }}">
+          <div class="caption">
+            <h5>
+              <span>{{ product.name }}</span>
+            </h5>
+            <small>{{ product.price | currency }}</small>
+            <h5>
+              <small>{{ product.description }}</small>
+            </h5>
+          </div>
+      </a>
+    </div>
+  </div>
+</section>
