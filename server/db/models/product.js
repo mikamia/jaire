@@ -21,7 +21,8 @@ module.exports = db.define('product', {
     type: Sequelize.STRING
   },
   tags: {
-    type: Sequelize.ARRAY(Sequelize.STRING)
+    type: Sequelize.ARRAY(Sequelize.STRING),
+    defaultValue: '[]'
   }
 }, {
   classMethods: {
