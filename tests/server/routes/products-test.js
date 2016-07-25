@@ -21,10 +21,10 @@ xdescribe('Products Route', function () {
     Product = db.model('product');
   });
 
-  describe('GET /', function () {
+  describe('GET /api/products', function () {
     it('should respond with an array via JSON', function (done) {
       return agent
-        .get('/')
+        .get('/api/products')
         .expect('Content-Type', /json/)
         .expect(200)
         .expect(function (res) {
