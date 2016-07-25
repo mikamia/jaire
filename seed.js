@@ -20,7 +20,7 @@ name in the environment files.
 var chalk = require('chalk');
 var db = require('./server/db');
 var User = db.model('user');
-var Product = db.model('product')
+var Product = db.model('product');
 var Promise = require('sequelize').Promise;
 
 var seedUsers = function () {
@@ -47,24 +47,25 @@ var seedUsers = function () {
 var seedProducts = function(){
     var products = [
     {
-        title: 'Brooklyn Bridge',
+        name: 'Brooklyn Bridge',
         description: 'A hint of salt with undertones of fresh bike tire and a tang of sweat',
         price: '100.00',
         image: 'http://icons.iconarchive.com/icons/icons8/windows-8/512/Astrology-Air-Element-icon.png',
         tags: '["Brooklyn", "Water", "Urban" ]'
 
     }, {
-        title: '',
-        description: '',
+        name: 'Prospect Park',
+        description: 'Notes of PBR and small-brimmed hats.',
         price: '20.00',
         image: 'http://icons.iconarchive.com/icons/icons8/ios7/256/Astrology-Water-Element-icon.png',
-        tags:'["", "", ""]',
+        tags:'["Brooklyn", "Artisan", "Premium"]',
     }, {
-        title: '',
-        description: '',
+        name: 'Staten Island Ferry',
+        description: 'Smells like fish and desperation.',
         price: '67.99',
         image: '',
-        tags: '["", "", ""]'
+        tags: '["Premium", "Urban", "Water"]',
+        starRating: '4',
     }
 
     ];
