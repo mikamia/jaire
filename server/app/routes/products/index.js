@@ -11,12 +11,21 @@ router.get('/', function(req, res, next) {
   .catch(next);
 });
 
-router.get('/:id', function(req, res, next) {
-  Product.findById(req.params.id)
+router.param('id', function(req, res, next, id) {
+  Product.findById(id)
   .then(function(product) {
-    res.send(product);
+    if (!product) {
+      throw new Error('not found!');
+    }
+    req.product = product;
+    next();
+    return null;
   })
   .catch(next);
+})
+
+router.get('/:id', function(req, res, next) {
+  res.json(req.product);
 });
 
 router.get('/:tag', function (req, res, next) {
@@ -36,10 +45,7 @@ router.post('/', function (req, res, next) {
 });
 
 router.put('/:id', function(req, res, next) {
-  Product.findById(req.params.id)
-  .then(function(product) {
-    return product.update(req.body)
-  })
+  req.product.update(req.body)
   .then(function(updatedProduct) {
     res.send(updatedProduct);
   })
@@ -47,9 +53,6 @@ router.put('/:id', function(req, res, next) {
 });
 
 router.delete('/:id', function(req, res, next) {
-  Product.findById(req.params.id)
-  .then(function(product) {
-    return product.destroy();
-  })
+  req.product.destroy()
   .catch(next);
-})
+});
