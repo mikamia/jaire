@@ -8,21 +8,23 @@ var db = require('../_db');
 module.exports = db.define('review', {
   stars: {
     type: Sequelize.INTEGER,
-    allowNull: false
+    allowNull: false,
+    validate: { 
+      min: 1,
+      max: 5
+    }
   },
   text: {
     type: Sequelize.TEXT,
     allowNull: false
   },
-  description: {
-    type: Sequelize.TEXT
+  title: {
+    type: Sequelize.TEXT,
+    allowNull: false
   },
-  imageUrl: {
-    type: Sequelize.STRING
-  },
-  tags: {
-    type: Sequelize.ARRAY(Sequelize.STRING),
-    defaultValue: '[]'
+  date:{
+    type: Sequelize.DATE,
+    defaultValue: Sequelize.NOW,
   }
 },
 });
