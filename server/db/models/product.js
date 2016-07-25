@@ -23,4 +23,16 @@ module.exports = db.define('product', {
   tags: {
     type: Sequelize.ARRAY(Sequelize.STRING)
   }
+}, {
+  classMethods: {
+    findByTag: function(tag) {
+      return this.findAll({
+        where: {
+          tags: {
+            $contains: [tag]
+          }
+        }
+      });
+    }
+  }
 });
