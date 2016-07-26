@@ -10,7 +10,7 @@ module.exports = db.define('order', {
     defaultValue: Sequelize.NOW,
   },
   status: {
-    type: Sequelize.ENUM('in cart', 'processed', 'shipped', 'cancelled', 'returned'),
+    type: Sequelize.ENUM('in cart', 'processing', 'shipped', 'cancelled', 'returned'),
     defaultValue: 'in cart', 
   }
 });

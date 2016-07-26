@@ -9,17 +9,16 @@ var Review = require('./models/review');
 var Product = require('./models/product');
 
 //order has many products
-Order.hasMany(Product, {as: 'products'});
+// Order.hasMany(Product, {foreignKey: 'products'});
 //order has one user
 Order.belongsTo(User);
-//order has one address
-Order.hasOne(Address);
+
+Address.hasMany(Order);
+Address.hasMany(User);
 
 //user has many orders
 User.hasMany(Order, {as: 'orders'});
-//user has many addresses
-User.hasMany(Address);
-//user has many reviews
+//user has many addresses//user has many reviews
 User.hasMany(Review);
 
 //product has many reviews

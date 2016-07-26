@@ -9,7 +9,8 @@ module.exports = db.define('address', {
         type: Sequelize.STRING
     },
     streetAddress2: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        defaultValue: '',
     },
     city: {
         type: Sequelize.STRING
