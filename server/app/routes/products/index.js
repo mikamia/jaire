@@ -1,6 +1,6 @@
 'use strict';
 var router = require('express').Router();
-var Product = require('../../db/models/product');
+var Product = require('../../../db/models/product');
 module.exports = router;
 
 router.get('/', function(req, res, next) {
