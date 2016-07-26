@@ -228,55 +228,6 @@ var seedOrders = function(){
     return Promise.all(creatingOrders)
 }
 
-
-// var seedReviews = function(){
-//     var reviews = [
-//     {
-        
-//     }, {
-        
-//     }, {
-        
-//     }];
-
-//     var creatingReviews = reviews.map(function(reviewObj){
-//         return Review.create(reviewObj);
-//     });
-
-//     return Promise.all(creatingReviews)
-// }
-// var seedReviews = function(){
-//     var reviews = [
-//     {
-        
-//     }, {
-        
-//     }, {
-        
-//     }];
-
-//     var creatingReviews = reviews.map(function(reviewObj){
-//         return Review.create(reviewObj);
-//     });
-
-//     return Promise.all(creatingReviews)
-// }
-// var seedReviews = function(){
-//     var reviews = [
-//     {
-        
-//     }, {
-        
-//     }, {
-        
-//     }];
-
-//     var creatingReviews = reviews.map(function(reviewObj){
-//         return Review.create(reviewObj);
-//     });
-
-//     return Promise.all(creatingReviews)
-// }
 db.sync({ force: true })
     .then(function(){
         return seedAddresses();
