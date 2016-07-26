@@ -28,7 +28,7 @@ router.get('/:id', function(req, res, next) {
   res.json(req.product);
 });
 
-router.get('/:tag', function (req, res, next) {
+router.get('/filter/:tag', function (req, res, next) {
   Product.findByTag(req.params.tag)
   .then(function(products) {
     res.send(products);
