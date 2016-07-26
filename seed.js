@@ -51,20 +51,20 @@ var seedProducts = function(){
         description: 'A hint of salt with undertones of fresh bike tire and a tang of sweat',
         price: '100.00',
         imageUrl: 'http://icons.iconarchive.com/icons/icons8/windows-8/512/Astrology-Air-Element-icon.png',
-        tags: '["Brooklyn", "Water", "Urban" ]'
+        tags: ["Brooklyn", "Water", "Urban" ]
 
     }, {
         name: 'Prospect Park',
         description: 'Notes of PBR and small-brimmed hats.',
         price: '20.00',
         imageUrl: 'http://icons.iconarchive.com/icons/icons8/ios7/256/Astrology-Water-Element-icon.png',
-        tags:'["Brooklyn", "Artisan", "Premium"]',
+        tags: ["Brooklyn", "Artisan", "Premium"],
     }, {
         name: 'Staten Island Ferry',
         description: 'Smells like fish and desperation.',
         price: '67.99',
         imageUrl: '',
-        tags: '["Premium", "Urban", "Water"]',
+        tags: ["Premium", "Urban", "Water"],
         starRating: '4',
     }
 

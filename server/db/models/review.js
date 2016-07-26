@@ -26,5 +26,4 @@ module.exports = db.define('review', {
     type: Sequelize.DATE,
     defaultValue: Sequelize.NOW,
   }
-},
 });
