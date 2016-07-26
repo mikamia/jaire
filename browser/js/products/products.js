@@ -1,7 +1,8 @@
-app.controller('ProductsController', function($scope, ProductsFactory, products) {
-
-  $scope.products = products;
-
+app.controller('ProductsController', function($scope, ProductsFactory) {
+  ProductsFactory.getAllProducts()
+  .then(products =>{
+    $scope.products = products;
+  });
 
 });
 
@@ -16,4 +17,16 @@ app.factory('ProductsFactory', function($http) {
   }
 
   return productsObj;
-})
+});
+
+
+app.config(function ($stateProvider) {
+
+    $stateProvider.state('products', {
+        url: '/products',
+        templateUrl: 'js/products/products.html',
+        controller: 'ProductsController'
+    });
+
+});
+
