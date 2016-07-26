@@ -22,7 +22,7 @@ module.exports = db.define('product', {
   },
   tags: {
     type: Sequelize.ARRAY(Sequelize.STRING),
-    defaultValue: '[]'
+    defaultValue: []
   }
 }, {
   classMethods: {
