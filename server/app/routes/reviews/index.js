@@ -38,8 +38,8 @@ router.post('/', function(req, res, next) {
 
 router.put('/:id', function(req, res, next) {
   req.review.update(req.body)
-    .then(function(updatedReview) {
-      res.send(updatedReview);
+    .then(function() {
+      res.send('updated!');
     })
     .catch(next);
 });
