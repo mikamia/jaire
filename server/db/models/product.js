@@ -46,8 +46,7 @@ module.exports = db.define('product', {
         return null;
     })
   }
-}}, 
-  {
+},
   classMethods: {
     findByTag: function(tag) {
       return this.findAll({

@@ -1,16 +1,11 @@
 app.controller('ProductsController', function($scope, ProductsFactory, $log) {
-  $scope.currCategory = [];
+  $scope.currCategory = null;
   $scope.setCategory = function(tag) {
-    $scope.currCategory.push(tag);
+    $scope.currCategory = tag;
     console.log($scope.currCategory);
-    var promises = $scope.currCategory.map(category=>{
-      return ProductsFactory.getByTag(category);
-    });
-    Promise.all(promises)
+    ProductsFactory.getByTag($scope.currCategory)
     .then(results =>{
-      results.forEach(result=>{
-        $scope.products = $scope.products.concat(result);
-      });
+      $scope.products = results;
     })
     .catch($log.error);
   };
@@ -22,7 +17,7 @@ app.controller('ProductsController', function($scope, ProductsFactory, $log) {
     console.log(tags);
   });
 
-  if ($scope.currCategory.length === 0) {
+  if (!$scope.currCategory) {
     ProductsFactory.getAllProducts()
     .then(products =>{
       $scope.products = products;

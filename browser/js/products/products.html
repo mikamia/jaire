@@ -3,13 +3,9 @@
   <h3>Products</h3>
   <div class="row">
     <div class='col-xs-2'>
-      <div ng-model="categories">
-        <div ng-repeat="aTag in allTags" class="checkbox">
-          <label>
-          <input type="checkbox" ng-click="setCategory(aTag)">{{aTag}}
-          </label>
-        </div>
-      </div>
+      <ul class="list-unstyled">
+        <li ng-repeat="aTag in allTags" ng-click="setCategory(aTag)"><a href="#">{{aTag}}</a></li>
+      </ul>
     </div>
     <div class='col-xs-10'>
       <div ng-repeat="product in products" class="col-xs-3">
