@@ -37,7 +37,7 @@ router.post('/', function(req, res, next) {
 });
 
 router.put('/:id', function(req, res, next) {
-  req.review.update(req.body)
+  Review.update(req.body)
     .then(function() {
       return Review.findById(req.params.id);
     })
@@ -48,7 +48,7 @@ router.put('/:id', function(req, res, next) {
 });
 
 router.delete('/:id', function(req, res, next) {
-  req.review.destroy()
+  Review.destroy()
     .then(function() {
       res.sendStatus(204)
     }).catch(next);
