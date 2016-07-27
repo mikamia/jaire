@@ -1,13 +1,27 @@
 app.controller('ProductsController', function($scope, ProductsFactory, $log) {
   $scope.currCategory = null;
+  
+  function resetCategory() {
+    ProductsFactory.getAllProducts()
+    .then(products =>{
+      $scope.products = products;
+    })
+    .catch($log.error);
+  }
+
   $scope.setCategory = function(tag) {
     $scope.currCategory = tag;
     console.log($scope.currCategory);
-    ProductsFactory.getByTag($scope.currCategory)
-    .then(results =>{
-      $scope.products = results;
-    })
-    .catch($log.error);
+    if (!$scope.currCategory) {
+      resetCategory();
+    } else {
+      ProductsFactory.getByTag($scope.currCategory)
+      .then(results =>{
+        $scope.products = results;
+      })
+      .catch($log.error);
+    }
+    
   };
 
   ProductsFactory.getAllTags()
@@ -18,14 +32,8 @@ app.controller('ProductsController', function($scope, ProductsFactory, $log) {
   });
 
   if (!$scope.currCategory) {
-    ProductsFactory.getAllProducts()
-    .then(products =>{
-      $scope.products = products;
-    })
-    .catch($log.error);
+    resetCategory();
   }
-  
-
 });
 
 app.factory('ProductsFactory', function($http) {
