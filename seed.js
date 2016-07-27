@@ -200,25 +200,25 @@ var seedOrders = function(){
         status: 'in cart',
         userId: 1,
         addressId: 1,
-        // products: [1, 3, 2]
+        cart: [1, 3, 2]
     },
     {
         status: 'shipped',
         userId: 1,
         addressId: 2,
-        // products: [1, 3, 2]
+        cart: [1, 3, 2]
     },
     {
         status: 'processing',
         userId: 1,
         addressId: 2,
-        // products: [1, 3, 2]
+        cart: [1, 3, 2]
     },
     {
         status: 'cancelled',
         userId: 1,
         addressId: 1,
-        // products: [1, 3, 2]
+        cart: [1, 3, 2]
     }];
 
     var creatingOrders = orders.map(function(orderObj){
