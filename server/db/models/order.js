@@ -9,6 +9,10 @@ module.exports = db.define('order', {
     type: Sequelize.DATE ,
     defaultValue: Sequelize.NOW,
   },
+  cart: {
+  	type: Sequelize.ARRAY(Sequelize.INTEGER),
+  	defaultValue: []
+  },
   status: {
     type: Sequelize.ENUM('in cart', 'processing', 'shipped', 'cancelled', 'returned'),
     defaultValue: 'in cart', 
