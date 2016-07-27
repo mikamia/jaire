@@ -28,7 +28,7 @@ router.get('/:id', function(req, res, next) {
 	res.json(req.order);
 });
 
-router.post('/:id', function(req, res, next) {
+router.post('/', function(req, res, next) {
 	Order.create(req.body)
 	.then(function(order) {
 		res.send(order);
