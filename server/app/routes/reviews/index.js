@@ -46,5 +46,7 @@ router.put('/:id', function(req, res, next) {
 
 router.delete('/:id', function(req, res, next) {
   req.review.destroy()
-    .catch(next);
+    .then(function() {
+      res.sendStatus(204)
+    }).catch(next);
 });
