@@ -5,6 +5,7 @@
     <div class='col-xs-2'>
       <ul class="list-unstyled">
         <li ng-repeat="aTag in allTags" ng-click="setCategory(aTag)"><a href="#">{{aTag}}</a></li>
+        <li ng-show="currCategory" ng-click="setCategory(null)"><a href="#">Clear Filter</a></li>
       </ul>
     </div>
     <div class='col-xs-10'>
