@@ -1,8 +1,30 @@
-app.controller('ProductsController', function($scope, ProductsFactory) {
-  ProductsFactory.getAllProducts()
-  .then(products =>{
-    $scope.products = products;
+app.controller('ProductsController', function($scope, ProductsFactory, $log) {
+  $scope.currCategory = null;
+  $scope.setCategory = function(tag) {
+    $scope.currCategory = tag;
+    console.log($scope.currCategory);
+    ProductsFactory.getByTag($scope.currCategory)
+    .then(results =>{
+      $scope.products = results;
+    })
+    .catch($log.error);
+  };
+
+  ProductsFactory.getAllTags()
+  .then(tags =>{
+    tags = Array.from(tags);
+    $scope.allTags = tags;
+    console.log(tags);
   });
+
+  if (!$scope.currCategory) {
+    ProductsFactory.getAllProducts()
+    .then(products =>{
+      $scope.products = products;
+    })
+    .catch($log.error);
+  }
+  
 
 });
 
@@ -14,6 +36,25 @@ app.factory('ProductsFactory', function($http) {
       .then(function(res) {
         return res.data;
       })
+  }
+
+  productsObj.getByTag = function (tag) {
+    return $http.get('/api/products/filter/' + tag)
+    .then(function(res) {
+      return res.data;
+    });
+  }
+
+  productsObj.getAllTags = function(){
+    return this.getAllProducts()
+    .then(products =>{
+      var tags = [];
+      products.forEach(product=>{
+        tags = tags.concat(product.tags);
+      });
+      tags = new Set(tags);
+      return tags;
+    });
   }
 
   return productsObj;
