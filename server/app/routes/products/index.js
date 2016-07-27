@@ -57,5 +57,8 @@ router.put('/:id', function(req, res, next) {
 
 router.delete('/:id', function(req, res, next) {
   req.product.destroy()
+  .then(function() {
+    res.sendStatus(204);
+  })
   .catch(next);
 });
