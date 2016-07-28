@@ -1,5 +1,6 @@
 app.controller('CartController', function($scope, CartFactory, $log) {
 
+
 });
 
 app.factory('CartFactory', function($http) {
@@ -13,3 +14,6 @@ app.config(function($stateProvider) {
     controller: 'CartController'
   });
 });
+
+//go through and display every thing in the current cart (session id?)
+//

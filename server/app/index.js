@@ -32,6 +32,7 @@ module.exports = function (db) {
 
     app.get('/*', function (req, res) {
         res.sendFile(app.get('indexHTMLPath'));
+
     });
 
     // Error catching endware.
@@ -40,6 +41,7 @@ module.exports = function (db) {
         console.error(err.stack);
         res.status(err.status || 500).send(err.message || 'Internal server error.');
     });
+
 
     return app;
 

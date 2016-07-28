@@ -11,6 +11,10 @@ var Product = require('./models/product');
 //order has one user
 Order.belongsTo(User);
 
+// product belongsToMany orders through a specific model with specific data e.g. through OrderProducts/LineItems
+// price at time of purchase
+// order belongsToMany products
+
 Address.hasMany(Order);
 Address.hasMany(User);
 
