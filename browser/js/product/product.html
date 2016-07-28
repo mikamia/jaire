@@ -8,7 +8,10 @@
             <h4>{{ product.price | currency }}</h4>
             <br>
             <h5>Rating:</h5>
-            <small>{{ product.rating }}</small>
+            <span ng-repeat="i in range(product.rating)" class="glyphicon glyphicon-star">
+                </span>
+            <span ng-repeat="i in range(5-product.rating)" class="glyphicon glyphicon-star-empty">
+                </span>
             <br>
             <br>
             <h5>Description:</h5>
@@ -41,7 +44,7 @@
     </div>
     <div class="row">
         <div class="col-xs-9">
-        <br>
+            <br>
             <h3>Reviews</h3>
             <br>
             <div class="reviews" ng-repeat="review in product.reviews">

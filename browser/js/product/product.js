@@ -17,11 +17,21 @@ app.controller('ProductController', function($scope, ProductFactory, $log, $stat
     })
   }
 
+  function calculateRating(reviews){
+    var sum = 0;
+    for(var x=0; x<reviews.length; x++){
+      sum += reviews[x].stars;
+    }
+    var avg = sum/(reviews.length+1);
+    return Math.round(avg);
+  }
+
   ProductFactory.getProduct(id)
   .then(product=>{
 
     $scope.product = product;
-    $scope.product.rating = product.rating;
+    $scope.product.rating = calculateRating(product.reviews);
+
     console.log($scope.product);
     //$scope.product.rating = product.rating;
     if(!$scope.product.imageUrl){
@@ -44,7 +54,7 @@ app.factory('ProductFactory', function($http) {
 
   productObj.getUser = function(id){
     return $http.get('api/user/' + id)
-    .then(function(res=>{
+    .then(res => {
       return res.data;
     })
   }
