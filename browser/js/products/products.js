@@ -1,22 +1,27 @@
 app.controller('ProductsController', function($scope, ProductsFactory, $log) {
   $scope.currCategory = null;
+  var allProducts = null;
   
   function resetCategory() {
+    $scope.currCategory = null;
     ProductsFactory.getAllProducts()
     .then(products =>{
       $scope.products = products;
+      allProducts = products;
     })
     .catch($log.error);
   }
 
-  $scope.submit = function(product) {
-    ProductsFactory.findByProduct = function() {
-      return $http.get('/api/products' + product)
-      .then(function(res) {
-        return res.data;
-      });
-    }
-  }
+
+  $scope.submit = function() {
+    $scope.currCategory = true;
+    var filterProduct = allProducts.filter(function(product) {
+      var lcProduct = product.name.toLowerCase();
+      var scopeProduct = $scope.search.toLowerCase();
+      return lcProduct.includes(scopeProduct);
+    });
+    $scope.products = filterProduct;
+  };
 
   $scope.setCategory = function(tag) {
     $scope.currCategory = tag;
