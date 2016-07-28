@@ -19,6 +19,7 @@ User.hasMany(Order, {as: 'orders'});
 User.hasMany(Review);
 
 //product has many reviews
-Product.hasMany(Review, {as: 'reviews'});
+// I took out the as 'reviews' alias because it was redundant. it will be 'reviews' without aliasing.
+Product.hasMany(Review);
 
 module.exports = db;
