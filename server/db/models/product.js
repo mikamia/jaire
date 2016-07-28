@@ -57,5 +57,13 @@ module.exports = db.define('product', {
         }
       });
     }
+  },
+  // the include must have the alias if it is used in the relationship definition
+  // as: 'reviews' for example
+  // but I took out the alias in the definition because it was redundant
+  defaultScope: {
+    include: [{
+      model: db.model('review'),
+    }]
   }
 });
