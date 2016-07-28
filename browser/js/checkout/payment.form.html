@@ -1,0 +1,26 @@
+<div class="container">
+    <form id="payment-form" name="paymentForm" ng-submit="paymentForm.$valid && sendPayment(payment)">
+        <div class="form-group">
+            <alert type="danger" ng-show="error">
+                {{ error }}
+            </alert>
+        </div>
+        <div class="form-goup">
+            <label for="name">Name</label>
+            <input type="text" ng-model="payment.name" class="form-control" id="name" placeholder="Name">
+        </div>
+        <div class="form-goup">
+            <label for="address">Shipping Address</label>
+            <input type="text" ng-model="payment.shippingAddress" class="form-control" id="shippingAddress" placeholder="Shipping Address">
+        </div>
+        <div class="form-group">
+            <label for="checkbox">Use my shipping address.</label>
+            <!-- will this work?? -->
+            <input type="checkbox" ng-true-value="payment.billingAddress = payment.shippingAddress" ng-false-value="showBillingAddress()">
+          <div class="form-group">
+            <label for="billingAddress">Billing Address</label>
+            <input type="text" ng-model="payment.billingAddress" class="form-control" id="billingAddress" placeholder="Billing Address">
+          </div>
+        </div>
+    </form>
+</div>
