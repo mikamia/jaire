@@ -9,6 +9,15 @@ app.controller('ProductsController', function($scope, ProductsFactory, $log) {
     .catch($log.error);
   }
 
+  $scope.submit = function(product) {
+    ProductsFactory.findByProduct = function() {
+      return $http.get('/api/products' + product)
+      .then(function(res) {
+        return res.data;
+      });
+    }
+  }
+
   $scope.setCategory = function(tag) {
     $scope.currCategory = tag;
     console.log($scope.currCategory);
