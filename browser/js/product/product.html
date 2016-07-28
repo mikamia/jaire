@@ -1,0 +1,41 @@
+<div class="container" id="product">
+    <div class="row">
+        <div class="col-xs-6">
+            <img class="productImage" ng-src="{{ product.imageUrl }}">
+        </div>
+        <div class="productDesc col-xs-4">
+            <h3>{{product.name}}</h3>
+            <h4>{{ product.price | currency }}</h4>
+            <br>
+            <h5>Description:</h5>
+            <small>{{ product.description }}</small>
+            <br><br>
+            <h5>Inventory Quantity:</h5>
+            <small>Only 3 left!</small>
+            <br><br>
+            <h5>Tags:</h5>
+            <ul class="list-inline">
+                <li ng-repeat="tag in product.tags">{{tag}}</li>
+            </ul>
+        </div>
+        <div class="col-xs-2">
+        <h3>Breathe now!</h3>
+        <div class="form-group">
+        <label for="select">Qty:</label>
+        <select class="form-control" id="select">
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+        </select>
+        </div>
+        <br>
+        <button type="submit" class="btn btn-primary">Add to Cart</button>
+        </div>
+    </div>
+    <div class="row">
+    <div class="col-xs-6">
+    <h4>Reviews</h4>
+    </div>
+    </div>
+</div>
