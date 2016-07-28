@@ -7,38 +7,54 @@
             <h3>{{product.name}}</h3>
             <h4>{{ product.price | currency }}</h4>
             <br>
+            <h5>Rating:</h5>
+            <small>{{ product.rating }}</small>
+            <br>
+            <br>
             <h5>Description:</h5>
             <small>{{ product.description }}</small>
-            <br><br>
+            <br>
+            <br>
             <h5>Inventory Quantity:</h5>
             <small>Only 3 left!</small>
-            <br><br>
+            <br>
+            <br>
             <h5>Tags:</h5>
             <ul class="list-inline">
                 <li ng-repeat="tag in product.tags">{{tag}}</li>
             </ul>
         </div>
         <div class="col-xs-2">
-        <h3>Breathe now!</h3>
-        <div class="form-group">
-        <label for="select">Qty:</label>
-        <select class="form-control" id="select">
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-        </select>
-        </div>
-        <br>
-        <button type="submit" class="btn btn-primary">Add to Cart</button>
+            <h3>Breathe now!</h3>
+            <div class="form-group">
+                <label for="select">Qty:</label>
+                <select class="form-control" id="select">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                </select>
+            </div>
+            <br>
+            <button type="submit" class="btn btn-primary">Add to Cart</button>
         </div>
     </div>
     <div class="row">
-    <div class="col-xs-8">
-    <h4>Reviews</h4>
-    <div class="reviews" ng-repeat="review in product.reviews">
-    <p>{{review}}</p>
-    </div>
-    </div>
+        <div class="col-xs-9">
+        <br>
+            <h3>Reviews</h3>
+            <br>
+            <div class="reviews" ng-repeat="review in product.reviews">
+                <span ng-repeat="i in range(review.stars)" class="glyphicon glyphicon-star">
+                </span>
+                <span ng-repeat="i in range(5-review.stars)" class="glyphicon glyphicon-star-empty">
+                </span>
+                <br>
+                <b>{{review.title}}</b> -
+                <span ng-bind="review.date | date:'MM/dd/yyyy'"></span>
+                <p>{{review.text}}</p>
+                <br>
+            </div>
+        </div>
     </div>
 </div>

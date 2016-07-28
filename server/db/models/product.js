@@ -27,25 +27,26 @@ module.exports = db.define('product', {
   }
 }, {
   getterMethods: {
-  rating: function(){
-    Review.findAll({
-      where: {
-        id: Review.product
-      }
-    })
-    .then(function(reviews){
-      if(reviews){
-        var sum = 0;
-        for(var x=0; x<reviews.length; x++){
-          sum += reviews[x].stars;
+    rating: function(){
+      return Review.findAll({
+        where: {
+          id: this.getDataValue('id')
         }
-        var avg = sum/(reviews.length+1);
-        return avg.toFixed(1);
-      }
-      else
-        return null;
-    })
-  }
+      })
+      .then(function(reviews){
+        if(reviews){
+          var sum = 0;
+          for(var x=0; x<reviews.length; x++){
+            sum += reviews[x].stars;
+          }
+          var avg = sum/(reviews.length+1);
+          console.log('avg', avg);
+          return avg.toFixed(1);
+        }
+        else
+          return null;
+      })
+    }
 },
   classMethods: {
     findByTag: function(tag) {
