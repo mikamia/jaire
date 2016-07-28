@@ -1,19 +1,30 @@
-<section id="products">
+
+<div class="container" id="products">
   <h3>Products</h3>
   <div class="row">
-    <div ng-repeat="product in products" class="col-xs-4">
-      <a class="thumbnail">
+    <div class='col-xs-2'>
+      <ul class="list-unstyled">
+        <li ng-repeat="aTag in allTags" ng-click="setCategory(aTag)"><a href="#">{{aTag}}</a></li>
+        <li ng-show="currCategory" ng-click="setCategory(null)"><a href="#">Clear Filter</a></li>
+      </ul>
+    </div>
+    <div class='col-xs-10'>
+      <div ng-repeat="product in products" class="col-xs-3">
+      <div class="thumbnail">
         <img ng-src="{{ product.imageUrl }}">
           <div class="caption">
             <h5>
               <span>{{ product.name }}</span>
             </h5>
-            <small>{{ product.price | currency }}</small>
-            <h5>
-              <small>{{ product.description }}</small>
-            </h5>
+            <span>{{ product.price | currency }}</span>
+            <small>{{ product.description }}</small>
+            <ul class="list-inline">
+              <li ng-repeat="tag in product.tags" ng-click="setCategory(tag)"><a href="#">{{tag}}</a></li>
+            </ul>
           </div>
-      </a>
+      </div>
+      </div>
     </div>
+    
   </div>
-</section>
+</div>

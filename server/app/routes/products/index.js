@@ -46,6 +46,9 @@ router.post('/', function (req, res, next) {
 
 router.put('/:id', function(req, res, next) {
   req.product.update(req.body)
+  .then(function() {
+    return Product.findById(req.params.id);
+  })
   .then(function(updatedProduct) {
     res.send(updatedProduct);
   })
