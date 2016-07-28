@@ -1,4 +1,3 @@
-
 <div class="container" id="products">
   <h3>Products</h3>
   <div class="row">
@@ -11,10 +10,10 @@
     <div class='col-xs-10'>
       <div ng-repeat="product in products" class="col-xs-3">
       <div class="thumbnail">
-        <img ng-src="{{ product.imageUrl }}">
+        <a ui-sref="product({id: product.id})"><img ng-src="{{ product.imageUrl }}"></a>
           <div class="caption">
             <h5>
-              <span>{{ product.name }}</span>
+              <span><a ui-sref="product({id: product.id})">{{ product.name }}</a></span>
             </h5>
             <span>{{ product.price | currency }}</span>
             <small>{{ product.description }}</small>
@@ -25,6 +24,6 @@
       </div>
       </div>
     </div>
-    
+
   </div>
 </div>
