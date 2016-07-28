@@ -7,11 +7,16 @@ app.config(function($stateProvider) {
   });
 });
 
-app.controller('SignupCtrl', function($scope, AuthFactory, $state) {
+app.controller('SignupCtrl', function($scope, AuthFactory, $state, AuthService) {
 
-  $scope.sendSignup = function() {
-    return AuthFactory.signup($scope.signup);
+  $scope.sendSignup = function(info) {
+    AuthFactory.signup($scope.signup);
+    return AuthService.login(info)
+      .then(function() {
+        $state.go('home');
+      })
   }
+
 
 });
 
@@ -25,10 +30,7 @@ app.factory('AuthFactory', function($http, $state) {
 
   authObj.signup = function(data) {
     return $http.post('/api/users', data)
-      .then(function() {
-        $state.go('home');
-      });
-    // .catch($log.error);
+      // .catch($log.error);
   };
 
   authObj.isLoggedIn = function() {
