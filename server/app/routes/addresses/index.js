@@ -1,23 +1,23 @@
 'use strict';
 var router = require('express').Router();
-var Order = require('../../../db/models/order');
+var Address = require('express').Router();
 module.exports = router;
 
 router.get('/', function(req, res, next) {
-  Order.findAll({})
-    .then(function(orders) {
-      res.send(orders);
+  Address.findAll({})
+    .then(function(addresses) {
+      res.send(addresses);
     })
     .catch(next);
 });
 
 router.param('id', function(req, res, next, id) {
-  Order.findById(id)
-    .then(function(order) {
-      if (!order) {
+  Address.findById(id)
+    .then(function(address) {
+      if (!address) {
         throw new Error('not found!');
       }
-      req.order = order;
+      req.address = address;
       next();
       return null;
     })
@@ -25,29 +25,29 @@ router.param('id', function(req, res, next, id) {
 });
 
 router.get('/:id', function(req, res, next) {
-  res.json(req.order);
+  res.json(req.address);
 });
 
 router.post('/', function(req, res, next) {
-  Order.create(req.body)
-    .then(function(order) {
-      res.send(order);
+  Address.create(req.body)
+    .then(function(address) {
+      res.send(address);
     })
     .catch(next);
 });
 
 router.put('/:id', function(req, res, next) {
-  req.order.update(req.body)
+  req.address.update(req.body)
     .then(function() {
-      return Order.findById(req.params.id);
+      return Address.findById(req.params.id);
     })
     .catch(next);
-})
+});
 
 router.delete('/:id', function(req, res, next) {
-  req.order.destroy()
+  req.address.destroy()
     .then(function() {
       res.sendStatus(204);
     })
     .catch(next);
-});
+})
