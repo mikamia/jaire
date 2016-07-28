@@ -1,29 +1,29 @@
 <div class="container" id="products">
     <div class="form-group">
-      <form ng-submit="submit()">
-        <div class="input spacing col-xs-12">
-            <input type="text" ng-model="search" placeholder="Search By Product" type="submit">
-            <!--  class="form-control" id="search" ng-repeat="product in allProducts | filter: { name: search }"-->
-            <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
-        </div>
+        <form ng-submit="submit()">
+            <div class="input spacing col-xs-12">
+                <input type="text" ng-model="search" placeholder="Search By Product" type="submit">
+                <!--  class="form-control" id="search" ng-repeat="product in allProducts | filter: { name: search }"-->
+                <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
+            </div>
         </form>
     </div>
-    <h3>Tags</h3>
     <div class="row">
         <div class='col-xs-2'>
+            <h3>Tags</h3>
             <ul class="list-unstyled">
-                <li ng-repeat="aTag in allTags" ng-click="setCategory(aTag)"><a href="#">{{aTag}}</a></li><br>
+                <li ng-repeat="aTag in allTags" ng-click="setCategory(aTag)"><a href="#">{{aTag}}</a></li>
+                <br>
                 <li ng-show="currCategory" ng-click="setCategory(null)"><a href="#"><b>Clear Filter</b></a></li>
             </ul>
         </div>
         <div class='col-xs-10'>
+            <h3>&nbsp;&nbsp;Products</h3>
             <div ng-repeat="product in products" class="col-xs-3">
                 <div class="thumbnail">
-                    <img ng-src="{{ product.imageUrl }}">
+                    <a ui-sref="product({id: product.id})"><img ng-src="{{ product.imageUrl }}"></a>
                     <div class="caption">
-                        <h5>
-              <span>{{ product.name }}</span>
-            </h5>
+                        <h5><a ui-sref="product({id: product.id})">{{ product.name }}</a></h5>
                         <span>{{ product.price | currency }}</span>
                         <br>
                         <small><i>{{ product.description }}</i></small>
