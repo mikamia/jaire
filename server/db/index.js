@@ -7,9 +7,16 @@ var Address = require('./models/address');
 var Order = require('./models/order');
 var Review = require('./models/review');
 var Product = require('./models/product');
+var Orderproduct = require('./models/order-products');
 
 //order has one user
 Order.belongsTo(User);
+Order.belongsToMany(Product, {
+  through: Orderproduct
+})
+Product.belongsToMany(Order, {
+  through: Orderproduct
+})
 
 // product belongsToMany orders through a specific model with specific data e.g. through OrderProducts/LineItems
 // price at time of purchase
@@ -19,7 +26,9 @@ Address.hasMany(Order);
 Address.hasMany(User);
 
 //user has many orders
-User.hasMany(Order, {as: 'orders'});
+User.hasMany(Order, {
+  as: 'orders'
+});
 User.hasMany(Review);
 
 //product has many reviews
