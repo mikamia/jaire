@@ -29,11 +29,18 @@ router.get('/:id', function(req, res, next) {
 });
 
 router.post('/', function(req, res, next) {
-	Order.create(req.body)
-	.then(function(order) {
-		res.send(order);
-	})
-	.catch(next);
+	if (req.user) {
+		// this is where we handle authenticated user add to cart
+		return;
+	} else {
+		// here we need to create a new order and add the products to it by using the setProduct method?
+		Order.create(req.body)
+		.then(function(order) {
+			req.session.orderId = order.id;
+			res.send(order);
+		})
+		.catch(next);
+	}
 });
 
 router.put('/:id', function(req, res, next) {

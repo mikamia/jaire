@@ -51,16 +51,6 @@ module.exports = function (app, db) {
             .catch(done);
     });
 
-    app.use(function(req, res, next){
-        if(!req.session.orderId){
-            Order.create()
-            .then(function(order){
-                req.session.orderId = order.id;
-            })
-            .catch(next)
-        }
-    })
-
     // We provide a simple GET /session in order to get session information directly.
     // This is used by the browser application (Angular) to determine if a user is
     // logged in already.
