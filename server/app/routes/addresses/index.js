@@ -1,6 +1,6 @@
 'use strict';
 var router = require('express').Router();
-var Address = require('express').Router();
+var Address = require('../../../db/models/address');
 module.exports = router;
 
 router.get('/', function(req, res, next) {
