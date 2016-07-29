@@ -4,6 +4,25 @@ var User = require('../../../db/models/user');
 module.exports = router;
 var _ = require('lodash');
 
+router.get('/me', function(req, res, next) {
+  console.log('req.user', req.user);
+  res.json(req.user);
+})
+
+router.get('/', function(req,res,next){
+  User.findAll()
+  .then(function(users){
+    res.json(users);
+  });
+})
+
+router.get('/:id', function(req,res,next){
+  User.findById(req.params.id)
+  .then(function(user){
+    res.send(user);
+  });
+})
+
 router.post('/', function(req, res, next) {
   User.create(req.body)
     .then(function(user) {

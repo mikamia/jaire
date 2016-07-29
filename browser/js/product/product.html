@@ -57,11 +57,25 @@
                 <span ng-repeat="i in range(5-review.stars)" class="glyphicon glyphicon-star-empty">
                 </span>
                 <br>
-                <b>{{review.title}}</b> -
-                <span ng-bind="review.date | date:'MM/dd/yyyy'"></span>
-                <p>{{review.text}}</p>
+                <small ng-bind="review.date | date:'MM/dd/yyyy'"></small>
                 <br>
+                <b>{{review.title}}</b> - <span>by {{review.name}}</span>
+
+
+                <p>{{review.text}}</p>
             </div>
+            <div ng-show="loggedIn">
+                <h3>Add a Review!</h3>
+                <label for="select">Stars:</label>
+                <select ng-model="newReview.stars" ng-options="star.value as star.label for star in stars">
+                Title: <textarea class="form-control" name="reviewTitle" ng-model="newReview.title" rows="1"></textarea>
+                <br>
+                Review:
+                <textarea class="form-control" name="reviewBody" ng-model="newReview.text" rows="5"></textarea><br>
+                <button type="submit" class="btn btn-primary" ng-click="createReview()">Submit</button>
+            </div>
+            <br>
+            <div ng-show="!loggedIn"><h3><a href="/login">Log in to Write a Review!</a></h3></div><br>
         </div>
     </div>
 </div>
