@@ -53,8 +53,11 @@
                 <span ng-repeat="i in range(5-review.stars)" class="glyphicon glyphicon-star-empty">
                 </span>
                 <br>
-                <b>{{review.title}}</b> -
-                <span ng-bind="review.date | date:'MM/dd/yyyy'"></span>
+                <small ng-bind="review.date | date:'MM/dd/yyyy'"></small>
+                <br>
+                <b>{{review.title}}</b> - <span>by {{review.name}}</span>
+
+
                 <p>{{review.text}}</p>
                 <br>
             </div>
