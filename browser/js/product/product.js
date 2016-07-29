@@ -62,6 +62,32 @@ app.factory('ProductFactory', function($http) {
   return productObj;
 });
 
+app.factory('OrderFactory', function($http){
+  var orderObj = {}
+
+  orderObj.addToOrder = function(product, productQty){
+    return $http.post('api/orders', {
+      productId: product.id,
+      price: product.price,
+      qty: productQty
+    })
+    .then(function(res){
+      return res;
+    })
+  }
+
+  orderObj.removeFromOrder=function(product){
+    // return $http.destroy or whatever it is
+    return
+  }
+
+  orderObj.updateQty=function(product){
+    //get order product and update qty field
+    return
+  }
+  
+  return orderObj;
+})
 
 app.config(function ($stateProvider) {
 

@@ -35,19 +35,23 @@ router.post('/', function(req, res, next) {
 		return;
 	} else {
 		// here we need to create a new order and add the products to it by using the setProduct method?
-		Order.create()
+		Order.findOrCreate({
+      where: {
+        id: req.session.orderId
+      }
+    })
 		.then(function(order) {
 			req.session.orderId = order.id;
       return order;
 		})
     .then(function(order) {
-      return Product.findById(req.body.productId)
-      .then(function(product) {
-        return order.addProduct(product, {price: product.price, qty: req.body.qty});
-      })
-      .then(function() {
-        res.sendStatus(204);
+      return order.addProduct(req.body.productId, {
+        price: req.body.price,
+        qty: req.body.qty
       });
+    })
+    .then(function() {
+      res.sendStatus(204);
     })
 		.catch(next);
 	}

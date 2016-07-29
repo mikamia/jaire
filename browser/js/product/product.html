@@ -31,7 +31,7 @@
             <h3>Breathe now!</h3>
             <div class="form-group">
                 <label for="select">Qty:</label>
-                <select class="form-control" id="select">
+                <select class="form-control" ng-model="productQty" id="select">
                     <option value="1">1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
@@ -39,7 +39,7 @@
                 </select>
             </div>
             <br>
-            <button type="submit" class="btn btn-primary">Add to Cart</button>
+            <button type="submit" class="btn btn-primary" ng-click="">Add to Cart</button>
         </div>
     </div>
     <div class="row">
