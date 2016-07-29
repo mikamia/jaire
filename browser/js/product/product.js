@@ -10,12 +10,6 @@ app.controller('ProductController', function($scope, ProductFactory, $log, $stat
     return arr;
   }
 
-  $scope.getUser = function(id){
-    return ProductFactory.getUser()
-    .then(user=>{
-      return user;
-    })
-  }
 
   function calculateRating(reviews){
     var sum = 0;
@@ -31,7 +25,12 @@ app.controller('ProductController', function($scope, ProductFactory, $log, $stat
 
     $scope.product = product;
     $scope.product.rating = calculateRating(product.reviews);
-
+    product.reviews.forEach(function(review,id){
+      return ProductFactory.getUser(review.userId)
+      .then(user => {
+        $scope.product.reviews[id].name = user.name;
+      })
+    })
     console.log($scope.product);
     //$scope.product.rating = product.rating;
     if(!$scope.product.imageUrl){
@@ -53,7 +52,7 @@ app.factory('ProductFactory', function($http) {
   }
 
   productObj.getUser = function(id){
-    return $http.get('api/user/' + id)
+    return $http.get('/api/users/' + id)
     .then(res => {
       return res.data;
     })
