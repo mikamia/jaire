@@ -8,6 +8,10 @@ module.exports = db.define('orderproduct', {
   price: {
     type: Sequelize.FLOAT,
     allowNull: false
+  },
+  qty: {
+    type: Sequelize.INTEGER,
+    allowNull: false
   }
 }, {
   classMethods: {
@@ -17,13 +21,15 @@ module.exports = db.define('orderproduct', {
           orderId: orderId
         }
       })
-        .then(function(orders) {
+        .then(function(products) {
           var sum = 0;
-          orders.forEach(function(order) {
-            sum += order.price;
+          products.forEach(function(product) {
+            sum += product.price * product.qty;
           });
           return sum;
         })
     }
   }
+  // also make a classMethod/virtal field to generate the sum price for each item (for cart view)
+  // virtual field for total price per product
 });

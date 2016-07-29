@@ -7,15 +7,15 @@ var Address = require('./models/address');
 var Order = require('./models/order');
 var Review = require('./models/review');
 var Product = require('./models/product');
-var Orderproduct = require('./models/order-products');
+var OrderProduct = require('./models/order-products');
 
 //order has one user
 Order.belongsTo(User);
 Order.belongsToMany(Product, {
-  through: Orderproduct
+  through: OrderProduct
 })
 Product.belongsToMany(Order, {
-  through: Orderproduct
+  through: OrderProduct
 })
 
 // product belongsToMany orders through a specific model with specific data e.g. through OrderProducts/LineItems

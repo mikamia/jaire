@@ -34,11 +34,14 @@ router.post('/', function(req, res, next) {
 		return;
 	} else {
 		// here we need to create a new order and add the products to it by using the setProduct method?
-		Order.create(req.body)
+		Order.create()
 		.then(function(order) {
 			req.session.orderId = order.id;
-			res.send(order);
+      return order;
 		})
+    .then(function(order) {
+      
+    })
 		.catch(next);
 	}
 });
