@@ -1,4 +1,5 @@
-app.controller('ProductController', function($scope, AuthService, ProductFactory, $log, $stateParams) {
+app.controller('ProductController', function($scope, AuthService, ProductFactory, $log, $stateParams, $state) {
+  var user = null;
   var id = $stateParams.id;
 
   //needed for star rating
@@ -11,16 +12,34 @@ app.controller('ProductController', function($scope, AuthService, ProductFactory
   }
 
   AuthService.getLoggedInUser(true)
-  .then(function(res) {
-    if (res === null) {
+  .then(function(loggedInUser) {
+    if (loggedInUser === null) {
       $scope.loggedIn = false;
     }
     else {
       $scope.loggedIn = true;
+      user = loggedInUser;
     }
-    console.log('authservice data', res);
-    return res.data;
+    console.log('authservice data', loggedInUser);
+    return loggedInUser.data;
   });
+
+  $scope.createReview = function() {
+    console.log('reached');
+    $scope.newReview.userId = user.id;
+    $scope.newReview.productId = id;
+    $scope.hasSubmitted = true;
+    ProductFactory
+    .create($scope.newReview)
+    .then(function(review) {
+      console.log('review object', review);
+      $state.go('product')
+    })
+    .catch(function(err) {
+      $scope.hasSubmitted = false;
+      $scope.servError = err.message || 'We weren\'t able to add your review. Try again later.';
+    });
+  }
 
   function calculateRating(reviews){
     var sum = 0;
@@ -30,6 +49,11 @@ app.controller('ProductController', function($scope, AuthService, ProductFactory
     var avg = sum/(reviews.length+1);
     return Math.round(avg);
   }
+
+  $scope.stars = [{
+    value: '5',
+    label: '\u2605' + '\u2605' + '\u2605' + '\u2605' + '\u2605' }
+    ]
 
   ProductFactory.getProduct(id)
   .then(product=>{
@@ -69,12 +93,13 @@ app.factory('ProductFactory', function($http) {
     })
   }
 
-  productObj.getMe = function() {
-    return $http.get('/api/users/me')
-    .then(res => {
+  productObj.create = function (data) {
+    console.log(data);
+    return $http.post('/api/reviews', data)
+    .then(function(res) {
       return res.data;
-    })
-  }
+    });
+  };
 
   return productObj;
 });
