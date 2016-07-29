@@ -6,6 +6,26 @@ app.config(function ($stateProvider) {
   });
 });
 
-app.controller('ReviewOrderCtrl', function ($scope) {
-  console.log('hello');
+app.controller('ReviewOrderCtrl', function ($scope, $state, AddressFactory) {
+  $scope.confirm = function () {
+    $state.go('confirmationPage')
+  }
+
+  AddressFactory.getAddress()
+  .then(function (address) {
+    $scope.address = address;
+  });
 });
+
+app.factory('AddressFactory', function($http){
+  var obj = {};
+
+  obj.getAddress = function () {
+    return $http.get('/api/addresses/unauth')
+    .then(function (res) {
+      return res.data;
+    });
+  };
+
+  return obj;
+})

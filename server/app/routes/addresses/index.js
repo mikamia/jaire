@@ -3,6 +3,14 @@ var router = require('express').Router();
 var Address = require('../../../db/models/address');
 module.exports = router;
 
+router.get('/unauth', function (req, res, next) {
+  Address.findById(req.session.addressId)
+  .then(function (address) {
+    res.send(address);
+  })
+  .catch(next);
+});
+
 router.get('/', function(req, res, next) {
   Address.findAll({})
     .then(function(addresses) {
@@ -31,6 +39,7 @@ router.get('/:id', function(req, res, next) {
 router.post('/', function(req, res, next) {
   Address.create(req.body)
     .then(function(address) {
+      req.session.addressId = address.id;
       res.send(address);
     })
     .catch(next);
