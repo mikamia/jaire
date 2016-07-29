@@ -56,8 +56,26 @@
                 <b>{{review.title}}</b> -
                 <span ng-bind="review.date | date:'MM/dd/yyyy'"></span>
                 <p>{{review.text}}</p>
-                <br>
             </div>
+            <div>
+                <h3>Add a Review!</h3>
+                <label for="select">Stars:</label>
+                <select class="form-control" name="rating" style="width:110px">
+                    <option value="5">&#x2605;&#x2605;&#x2605;&#x2605;&#x2605;</option>
+                    <option value="4">&#x2605;&#x2605;&#x2605;&#x2605;&#x2606;</option>
+                    <option value="3">&#x2605;&#x2605;&#x2605;&#x2606;&#x2606;</option>
+                    <option value="2">&#x2605;&#x2605;&#x2606;&#x2606;&#x2606;</option>
+                    <option value="1">&#x2605;&#x2606;&#x2606;&#x2606;&#x2606;</option>
+                </select><br>
+                Title: <textarea class="form-control" name="reviewTitle" rows="1"></textarea>
+                <br>
+                Review:
+                <textarea class="form-control" name="reviewBody" rows="5"></textarea>
+            </div>
+            <br>
+            <button type="submit" class="btn btn-primary">Submit</button>
+            <br>
+            <br>
         </div>
     </div>
 </div>
