@@ -7,11 +7,12 @@ app.config(function($stateProvider) {
   });
 });
 
-app.controller('PaymentCtrl', function($scope, PaymentFactory) {
+app.controller('PaymentCtrl', function($scope, PaymentFactory, $state) {
   $scope.sendPayment = function() {
     $scope.paymentForm.$setPristine();
     PaymentFactory.addPayment($scope.payment);
     $scope.payment = {};
+    $state.go('reviewOrder')
   }
 
   $scope.sameAdd = false;
