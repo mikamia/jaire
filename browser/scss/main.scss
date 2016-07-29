@@ -4,6 +4,7 @@
 
 body {
   background: #fdfdfd;
+  font-family: 'Roboto', sans-serif;
 }
 
 @mixin clearfix {
@@ -26,3 +27,5 @@ body {
 @import 'login/main';
 @import 'products/main';
 @import 'product/main';
+@import url(https://fonts.googleapis.com/css?family=Cardo:400,700,400italic);
+@import url(https://fonts.googleapis.com/css?family=Roboto);
