@@ -1,4 +1,4 @@
-app.controller('ProductController', function($scope, ProductFactory, $log, $stateParams) {
+app.controller('ProductController', function($scope, AuthService, ProductFactory, $log, $stateParams) {
   var id = $stateParams.id;
 
   //needed for star rating
@@ -10,6 +10,17 @@ app.controller('ProductController', function($scope, ProductFactory, $log, $stat
     return arr;
   }
 
+  AuthService.getLoggedInUser(true)
+  .then(function(res) {
+    if (res === null) {
+      $scope.loggedIn = false;
+    }
+    else {
+      $scope.loggedIn = true;
+    }
+    console.log('authservice data', res);
+    return res.data;
+  });
 
   function calculateRating(reviews){
     var sum = 0;
@@ -31,7 +42,7 @@ app.controller('ProductController', function($scope, ProductFactory, $log, $stat
         $scope.product.reviews[id].name = user.name;
       })
     })
-    console.log($scope.product);
+    //console.log($scope.product);
     //$scope.product.rating = product.rating;
     if(!$scope.product.imageUrl){
       $scope.product.imageUrl = 'http://www.beniceorleavethanks.com/wp-content/uploads/2015/05/Mason-Jar-Sipper.jpg';
@@ -53,6 +64,13 @@ app.factory('ProductFactory', function($http) {
 
   productObj.getUser = function(id){
     return $http.get('/api/users/' + id)
+    .then(res => {
+      return res.data;
+    })
+  }
+
+  productObj.getMe = function() {
+    return $http.get('/api/users/me')
     .then(res => {
       return res.data;
     })

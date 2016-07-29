@@ -60,7 +60,7 @@
 
                 <p>{{review.text}}</p>
             </div>
-            <div>
+            <div ng-show="loggedIn">
                 <h3>Add a Review!</h3>
                 <label for="select">Stars:</label>
                 <select class="form-control" name="rating" style="width:110px">
@@ -73,12 +73,11 @@
                 Title: <textarea class="form-control" name="reviewTitle" rows="1"></textarea>
                 <br>
                 Review:
-                <textarea class="form-control" name="reviewBody" rows="5"></textarea>
+                <textarea class="form-control" name="reviewBody" rows="5"></textarea><br>
+                <button type="submit" class="btn btn-primary" ng-click="isLoggedIn()">Submit</button>
             </div>
             <br>
-            <button type="submit" class="btn btn-primary">Submit</button>
-            <br>
-            <br>
+            <div ng-show="!loggedIn"><h3><a href="/login">Log in to Write a Review!</a></h3></div><br>
         </div>
     </div>
 </div>
