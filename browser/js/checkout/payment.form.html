@@ -14,14 +14,16 @@
             <input type="text" ng-model="payment.streetAddress" class="form-control" id="shippingAddress" placeholder="Street Address">
             <input type="text" ng-model="payment.streetAddress2" class="form-control" id="shippingAddress" placeholder="Street Address 2">
             <input type="text" ng-model="payment.city" class="form-control" id="shippingAddress" placeholder="City">
-            <input type="text" ng-model="payment.state" class="form-control" id="shippingAddress" placeholder="State">
+            <select type="text" ng-model="payment.state" class="form-control" id="shippingAddress">
+                <option ng-repeat="state in states">{{ state }}</option>
+            </select>
             <input type="text" ng-model="payment.zip" class="form-control" id="shippingAddress" placeholder="Zip Code">
         </div>
         <div class="form-group">
             <label for="checkbox">Use my shipping address.</label>
-            <input type="checkbox">
+            <input type="checkbox" ng-model="billing" ng-change="checkboxChange()">
         </div>
-        <div class="form-goup" ng-hide="showBillingAddress()">
+        <div class="form-goup" ng-hide="sameAdd">
             <label for="address">Billing Address</label>
             <input type="text" class="form-control" placeholder="Street Address">
             <input type="text" class="form-control" placeholder="Street Address 2">
