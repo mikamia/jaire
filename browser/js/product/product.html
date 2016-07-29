@@ -31,15 +31,19 @@
             <h3>Breathe now!</h3>
             <div class="form-group">
                 <label for="select">Qty:</label>
-                <select class="form-control" id="select">
+                <select class="form-control" ng-model="productQty" id="select">
                     <option value="1">1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
                     <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>                  
                 </select>
             </div>
             <br>
-            <button type="submit" class="btn btn-primary">Add to Cart</button>
+            <button type="submit" class="btn btn-primary" ng-click="addToCart(product, productQty)">Add to Cart</button>
+            <div ng-show="addSuccess">Added to cart!</div>
         </div>
     </div>
     <div class="row">

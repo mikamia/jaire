@@ -1,6 +1,7 @@
 'use strict';
 var router = require('express').Router();
 var Order = require('../../../db/models/order');
+var Product = require('../../../db/models/product');
 module.exports = router;
 
 router.get('/', function(req, res, next) {
@@ -29,11 +30,29 @@ router.get('/:id', function(req, res, next) {
 });
 
 router.post('/', function(req, res, next) {
-  Order.create(req.body)
-    .then(function(order) {
-      res.send(order);
+	if (req.user) {
+		// this is where we handle authenticated user add to cart
+		return;
+	} else {
+		// here we need to create a new order and add the products to it by using the setProduct method?
+		Order.findOrCreate({
+      where: {
+        id: req.session.orderId
+      }
     })
-    .catch(next);
+		.spread(function(order) {
+			req.session.orderId = order.id;
+      return order.addProduct(req.body.productId, {
+				price: req.body.price,
+				qty: req.body.qty
+			});
+		})
+    .then(function() {
+      console.log('order.addProduct is a fucking function!!!');
+      res.sendStatus(204);
+    })
+		.catch(next);
+	}
 });
 
 router.put('/:id', function(req, res, next) {

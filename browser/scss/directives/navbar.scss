@@ -42,8 +42,14 @@ navbar {
     float: right;
     border: 1px solid black;
     margin-top: 10px;
+    margin-right: 10px;
     background: none;
     outline: none !important;
+  }
+
+  .cart-button {
+    float: right;
+    margin-top: 10px;
   }
 
   .welcome {

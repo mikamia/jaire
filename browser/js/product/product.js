@@ -1,7 +1,7 @@
-app.controller('ProductController', function($scope, AuthService, ProductFactory, $log, $stateParams, $state) {
+app.controller('ProductController', function($scope, OrderFactory, AuthService, ProductFactory, $log, $stateParams, $state) {
   var user = null;
   var id = $stateParams.id;
-
+  $scope.productQty = "1";
   //needed for star rating
   $scope.range = function(n){
     var arr = [];
@@ -39,6 +39,16 @@ app.controller('ProductController', function($scope, AuthService, ProductFactory
       $scope.hasSubmitted = false;
       $scope.servError = err.message || 'We weren\'t able to add your review. Try again later.';
     });
+  }
+
+  $scope.addSuccess=false;
+
+  $scope.addToCart = function(product, productQty){
+    return OrderFactory.addToOrder(product, productQty)
+    .then(function(){
+      $scope.addSuccess=true;
+    })
+    .catch($log.error)
   }
 
   function calculateRating(reviews){
@@ -104,6 +114,41 @@ app.factory('ProductFactory', function($http) {
   return productObj;
 });
 
+app.factory('OrderFactory', function($http){
+  var orderObj = {}
+
+  orderObj.getOrder = function(id){
+    return $http.get('api/orders/' + id)
+    .then(function(res){
+      return res.data;
+    })
+  }
+
+  orderObj.addToOrder = function(product, productQty){
+    return $http.post('api/orders/', {
+      productId: product.id,
+      price: product.price,
+      qty: productQty
+    })
+    .then(function(res){
+      return res;
+    })
+  }
+  orderObj.removeFromOrder=function(product){
+    // return $http.destroy or whatever it is
+    return
+  }
+
+  orderObj.updateQty=function(product){
+    //get order product and update qty field
+    return $http.put('api/orders/' + product.id, product)
+    .then(function(res){
+      return res.data
+    })
+  }
+  
+  return orderObj;
+})
 
 app.config(function ($stateProvider) {
 

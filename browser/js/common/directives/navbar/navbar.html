@@ -8,6 +8,7 @@
                 <a ui-sref-active="active" ui-sref="{{ item.state }}">{{ item.label }}</a>
             </li>
         </ul>
+        <button type="button" class="btn btn-primary cart-button" ui-sref="cart">My Cart <i class="glyphicon glyphicon-shopping-cart"></i></button>
         <button ng-hide="isLoggedIn()" ui-sref="signup" class="btn login-button">Signup</button>
         <button ng-show="!user" ui-sref="login" class="btn login-button">Login</button>
         <div ng-show="user" class="welcome">

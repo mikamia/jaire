@@ -86,7 +86,7 @@ var seedProducts = function(){
         name: 'Staten Island Ferry',
         description: 'Smells like fish and desperation.',
         price: '67.99',
-        imageUrl: '',
+        imageUrl: 'http://media.offexploring.co.uk/photos/dan-and-fay/photos/300710-Picture%2030072010%20011.jpg',
         tags: ["Premium", "Urban", "Water"],
     }
 
@@ -199,26 +199,23 @@ var seedOrders = function(){
     {
         status: 'in cart',
         userId: 1,
-        addressId: 1,
-        cart: [1, 3, 2]
+        addressId: 1
     },
     {
         status: 'shipped',
         userId: 1,
-        addressId: 2,
-        cart: [1, 3, 2]
+        addressId: 2
     },
     {
         status: 'processing',
         userId: 1,
         addressId: 2,
-        cart: [1, 3, 2]
     },
     {
         status: 'cancelled',
         userId: 1,
         addressId: 1,
-        cart: [1, 3, 2]
+
     }];
 
     var creatingOrders = orders.map(function(orderObj){
