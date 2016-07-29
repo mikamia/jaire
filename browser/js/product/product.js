@@ -1,6 +1,6 @@
-app.controller('ProductController', function($scope, ProductFactory, $log, $stateParams) {
+app.controller('ProductController', function($scope, ProductFactory, OrderFactory, $log, $stateParams) {
   var id = $stateParams.id;
-
+  $scope.productQty = "1";
   //needed for star rating
   $scope.range = function(n){
     var arr = [];
@@ -15,6 +15,16 @@ app.controller('ProductController', function($scope, ProductFactory, $log, $stat
     .then(user=>{
       return user;
     })
+  }
+
+  $scope.addSuccess=false;
+
+  $scope.addToCart = function(product, productQty){
+    return OrderFactory.addToOrder(product, productQty)
+    .then(function(){
+      $scope.addSuccess=true;
+    })
+    .catch($log.error)
   }
 
   function calculateRating(reviews){
@@ -65,8 +75,15 @@ app.factory('ProductFactory', function($http) {
 app.factory('OrderFactory', function($http){
   var orderObj = {}
 
+  orderObj.getOrder = function(id){
+    return $http.get('api/orders/' + id)
+    .then(function(res){
+      return res.data;
+    })
+  }
+
   orderObj.addToOrder = function(product, productQty){
-    return $http.post('api/orders', {
+    return $http.post('api/orders/', {
       productId: product.id,
       price: product.price,
       qty: productQty
@@ -75,7 +92,6 @@ app.factory('OrderFactory', function($http){
       return res;
     })
   }
-
   orderObj.removeFromOrder=function(product){
     // return $http.destroy or whatever it is
     return
@@ -83,7 +99,10 @@ app.factory('OrderFactory', function($http){
 
   orderObj.updateQty=function(product){
     //get order product and update qty field
-    return
+    return $http.put('api/orders/' + product.id, product)
+    .then(function(res){
+      return res.data
+    })
   }
   
   return orderObj;

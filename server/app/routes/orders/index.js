@@ -40,17 +40,15 @@ router.post('/', function(req, res, next) {
         id: req.session.orderId
       }
     })
-		.then(function(order) {
+		.spread(function(order) {
 			req.session.orderId = order.id;
-      return order;
-		})
-    .then(function(order) {
       return order.addProduct(req.body.productId, {
-        price: req.body.price,
-        qty: req.body.qty
-      });
-    })
+				price: req.body.price,
+				qty: req.body.qty
+			});
+		})
     .then(function() {
+      console.log('order.addProduct is a fucking function!!!');
       res.sendStatus(204);
     })
 		.catch(next);

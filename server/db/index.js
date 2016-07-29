@@ -13,10 +13,10 @@ var OrderProduct = require('./models/order-products');
 Order.belongsTo(User);
 Order.belongsToMany(Product, {
   through: OrderProduct
-})
+});
 Product.belongsToMany(Order, {
   through: OrderProduct
-})
+});
 
 // product belongsToMany orders through a specific model with specific data e.g. through OrderProducts/LineItems
 // price at time of purchase
