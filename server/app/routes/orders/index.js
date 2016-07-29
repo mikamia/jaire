@@ -1,6 +1,7 @@
 'use strict';
 var router = require('express').Router();
 var Order = require('../../../db/models/order');
+var Product = require('../../../db/models/product');
 module.exports = router;
 
 router.get('/', function(req, res, next) {
@@ -40,7 +41,13 @@ router.post('/', function(req, res, next) {
       return order;
 		})
     .then(function(order) {
-      
+      return Product.findById(req.body.productId)
+      .then(function(product) {
+        return order.addProduct(product, {price: product.price, qty: req.body.qty});
+      })
+      .then(function() {
+        res.sendStatus(204);
+      });
     })
 		.catch(next);
 	}
