@@ -47,6 +47,15 @@ navbar {
     outline: none !important;
   }
 
+  .logout-button {
+    float: right;
+    border: 1px solid black;
+    margin-top: 10px;
+    margin-right: 10px;
+    background: none;
+    outline: none !important;
+  }
+
   .cart-button {
     float: right;
     margin-top: 10px;
@@ -54,11 +63,11 @@ navbar {
 
   .welcome {
     float: right;
-    margin-top: 12px;
+    margin-top: 16px;
     span {
       color: #596A77;
       font-size: 16px;
-      margin-right: 5px;
+      margin-right: 8px;
     }
     a {
       color: #949A9F;

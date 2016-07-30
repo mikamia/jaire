@@ -11,9 +11,9 @@
         <button type="button" class="btn btn-primary cart-button" ui-sref="cart">My Cart <i class="glyphicon glyphicon-shopping-cart"></i></button>
         <button ng-hide="isLoggedIn()" ui-sref="signup" class="btn login-button">Signup</button>
         <button ng-show="!user" ui-sref="login" class="btn login-button">Login</button>
+        <button ng-show="isLoggedIn()" class="btn logout-button" ng-click="logout()">Logout</a></button>
         <div ng-show="user" class="welcome">
-            <span>Welcome, {{ user.email }}!</span>
-            <a ng-click="logout()">Logout</a>
+            <span>Welcome, {{ user.name }}!</span>
         </div>
     </div>
 </nav>

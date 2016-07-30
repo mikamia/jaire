@@ -64,11 +64,12 @@
 
                 <p>{{review.text}}</p>
             </div>
+            <hr>
             <div ng-show="loggedIn">
                 <h3>Add a Review!</h3>
-                <label for="select">Stars:</label>
-                <select ng-model="newReview.stars" ng-options="star.value as star.label for star in stars">
-                Title: <textarea class="form-control" name="reviewTitle" ng-model="newReview.title" rows="1"></textarea>
+                <label for="select">Stars:</label><br>
+                <select ng-model="newReview.stars" ng-options="star.value as star.label for star in stars"></select><br><br>
+                Title:<textarea class="form-control" name="reviewTitle" ng-model="newReview.title" rows="1"></textarea>
                 <br>
                 Review:
                 <textarea class="form-control" name="reviewBody" ng-model="newReview.text" rows="5"></textarea><br>
