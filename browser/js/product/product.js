@@ -19,9 +19,9 @@ app.controller('ProductController', function($scope, OrderFactory, AuthService, 
     else {
       $scope.loggedIn = true;
       user = loggedInUser;
+      console.log('authservice data', loggedInUser);
+      return loggedInUser.data;
     }
-    console.log('authservice data', loggedInUser);
-    return loggedInUser.data;
   });
 
   $scope.createReview = function() {
