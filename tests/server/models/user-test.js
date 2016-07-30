@@ -7,7 +7,7 @@ var db = require('../../../server/db');
 
 var User = db.model('user');
 
-xdescribe('User model', function () {
+describe('User model', function () {
 
     beforeEach('Sync DB', function () {
        return db.sync({ force: true });
