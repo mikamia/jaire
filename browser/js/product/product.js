@@ -162,7 +162,12 @@ app.config(function ($stateProvider) {
     $stateProvider.state('product', {
         url: '/product/:id',
         templateUrl: 'js/product/product.html',
-        controller: 'ProductController'
+        controller: 'ProductController',
+        // resolve: {
+        //   updateReview: function(ProductFactory, $stateParams) {
+        //     return ProductFactory.create($stateParams.id);
+        //   }
+        // }
     });
 
 });
