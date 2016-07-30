@@ -29,7 +29,16 @@ module.exports = db.define('orderproduct', {
           return sum;
         })
     }
+  },
+  instanceMethods: {
+    getTotalPrice: function() {
+      return this.price * this.qty;
+    }
+  },
+  defaultScope: {
+    include: [{
+      model: db.model('product'),
+      attributes: ['name', 'imageUrl']
+    }]
   }
-  // also make a classMethod/virtal field to generate the sum price for each item (for cart view)
-  // virtual field for total price per product
 });

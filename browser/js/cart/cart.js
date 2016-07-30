@@ -1,17 +1,28 @@
-// app.controller('CartController', function($scope, CartFactory, $log) {
+app.controller('CartController', function($scope, CartFactory, $log) {
+  CartFactory.getCurrOrderProds()
+  .then(products => {
+    $scope.order = products;
+  })
+  .catch($log.error);
 
+});
 
-// });
-
-// app.factory('CartFactory', function($http) {
-
-// });
+app.factory('CartFactory', function($http) {
+  let cartF = {};
+  cartF.getCurrOrderProds = function () {
+    return $http.get('/api/cart')
+    .then(function(res) {
+      return res.data;
+    });
+  }
+  return cartF;
+});
 
 app.config(function($stateProvider) {
   $stateProvider.state('cart', {
     url: '/cart',
     templateUrl: 'js/cart/cart.html',
-    // controller: 'CartController'
+    controller: 'CartController'
   });
 });
 

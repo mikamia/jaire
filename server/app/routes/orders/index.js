@@ -2,6 +2,7 @@
 var router = require('express').Router();
 var Order = require('../../../db/models/order');
 var Product = require('../../../db/models/product');
+var OrderProduct = require('../../../db/models/order-products');
 module.exports = router;
 
 router.get('/', function(req, res, next) {
@@ -28,6 +29,17 @@ router.param('id', function(req, res, next, id) {
 router.get('/:id', function(req, res, next) {
   res.json(req.order);
 });
+
+router.get('/cart', function (req, res, next) {
+  OrderProduct.findAll({
+    where: {
+      orderId: req.session.orderId
+    }
+  })
+  .then(function(products) {
+    res.send(products);
+  })
+})
 
 router.post('/', function(req, res, next) {
 	if (req.user) {
