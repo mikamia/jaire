@@ -60,10 +60,17 @@ app.controller('ProductController', function($scope, OrderFactory, AuthService, 
     return Math.round(avg);
   }
 
-  $scope.stars = [{
-    value: '5',
-    label: '\u2605' + '\u2605' + '\u2605' + '\u2605' + '\u2605' }
-    ]
+  $scope.stars = [{ value: '5',
+                    label: '\u2605' + '\u2605' + '\u2605' + '\u2605' + '\u2605' },
+                  { value: '4',
+                    label: '\u2605' + '\u2605' + '\u2605' + '\u2605' + '\u2606' },
+                  { value: '3',
+                    label: '\u2605' + '\u2605' + '\u2605' + '\u2606' + '\u2606' },
+                  { value: '2',
+                    label: '\u2605' + '\u2605' + '\u2606' + '\u2606' + '\u2606' },
+                  { value: '1',
+                    label: '\u2605' + '\u2606' + '\u2606' + '\u2606' + '\u2606' },
+                  ]
 
   ProductFactory.getProduct(id)
   .then(product=>{
