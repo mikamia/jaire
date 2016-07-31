@@ -5,6 +5,10 @@ var Sequelize = require('sequelize');
 var db = require('../_db');
 
 module.exports = db.define('orderproduct', {
+  name: {
+    type: Sequelize.STRING,
+    allowNull: false
+  },
   price: {
     type: Sequelize.FLOAT,
     allowNull: false
@@ -29,7 +33,10 @@ module.exports = db.define('orderproduct', {
           return sum;
         })
     }
+  },
+  getterMethods: {
+    totalPrice: function() {
+      return this.price * this.qty;
+    }
   }
-  // also make a classMethod/virtal field to generate the sum price for each item (for cart view)
-  // virtual field for total price per product
 });

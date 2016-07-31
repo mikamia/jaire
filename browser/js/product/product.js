@@ -134,6 +134,7 @@ app.factory('OrderFactory', function($http){
   orderObj.addToOrder = function(product, productQty){
     return $http.post('api/orders/', {
       productId: product.id,
+      name: product.name,
       price: product.price,
       qty: productQty
     })

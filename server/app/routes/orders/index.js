@@ -2,6 +2,7 @@
 var router = require('express').Router();
 var Order = require('../../../db/models/order');
 var Product = require('../../../db/models/product');
+var OrderProduct = require('../../../db/models/order-products');
 module.exports = router;
 
 router.get('/', function(req, res, next) {
@@ -11,6 +12,17 @@ router.get('/', function(req, res, next) {
     })
     .catch(next);
 });
+
+router.get('/cart', function (req, res, next) {
+  OrderProduct.findAll({
+    where: {
+      orderId: req.session.orderId
+    }
+  })
+  .then(products => {
+    res.send(products);
+  });
+})
 
 router.param('id', function(req, res, next, id) {
   Order.findById(id)
@@ -29,6 +41,7 @@ router.get('/:id', function(req, res, next) {
   res.json(req.order);
 });
 
+
 router.post('/', function(req, res, next) {
 	if (req.user) {
 		// this is where we handle authenticated user add to cart
@@ -43,6 +56,7 @@ router.post('/', function(req, res, next) {
 		.spread(function(order) {
 			req.session.orderId = order.id;
       return order.addProduct(req.body.productId, {
+        name: req.body.name,
 				price: req.body.price,
 				qty: req.body.qty
 			});
