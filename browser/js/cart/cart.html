@@ -19,7 +19,7 @@
             <tr ng-repeat="product in order">
               <td>{{ product.name }}</td>
               <td>{{ product.qty }}</td>
-              <td>{{ product.price }}</td>
+              <td>${{ product.totalPrice }}</td>
             </tr>
           </tbody>
         </table>

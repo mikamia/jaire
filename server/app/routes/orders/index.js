@@ -13,6 +13,17 @@ router.get('/', function(req, res, next) {
     .catch(next);
 });
 
+router.get('/cart', function (req, res, next) {
+  OrderProduct.findAll({
+    where: {
+      orderId: req.session.orderId
+    }
+  })
+  .then(products => {
+    res.send(products);
+  });
+})
+
 router.param('id', function(req, res, next, id) {
   Order.findById(id)
     .then(function(order) {
@@ -30,16 +41,6 @@ router.get('/:id', function(req, res, next) {
   res.json(req.order);
 });
 
-router.get('/cart', function (req, res, next) {
-  OrderProduct.findAll({
-    where: {
-      orderId: req.session.orderId
-    }
-  })
-  .then(function(products) {
-    res.send(products);
-  })
-})
 
 router.post('/', function(req, res, next) {
 	if (req.user) {
@@ -55,6 +56,7 @@ router.post('/', function(req, res, next) {
 		.spread(function(order) {
 			req.session.orderId = order.id;
       return order.addProduct(req.body.productId, {
+        name: req.body.name,
 				price: req.body.price,
 				qty: req.body.qty
 			});

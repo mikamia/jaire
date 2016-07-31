@@ -10,7 +10,7 @@ app.controller('CartController', function($scope, CartFactory, $log) {
 app.factory('CartFactory', function($http) {
   let cartF = {};
   cartF.getCurrOrderProds = function () {
-    return $http.get('/api/cart')
+    return $http.get('/api/orders/cart')
     .then(function(res) {
       return res.data;
     });

@@ -5,6 +5,10 @@ var Sequelize = require('sequelize');
 var db = require('../_db');
 
 module.exports = db.define('orderproduct', {
+  name: {
+    type: Sequelize.STRING,
+    allowNull: false
+  },
   price: {
     type: Sequelize.FLOAT,
     allowNull: false
@@ -30,15 +34,9 @@ module.exports = db.define('orderproduct', {
         })
     }
   },
-  instanceMethods: {
-    getTotalPrice: function() {
+  getterMethods: {
+    totalPrice: function() {
       return this.price * this.qty;
     }
-  },
-  defaultScope: {
-    include: [{
-      model: db.model('product'),
-      attributes: ['name', 'imageUrl']
-    }]
   }
 });
