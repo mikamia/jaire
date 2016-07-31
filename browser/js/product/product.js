@@ -142,6 +142,15 @@ app.factory('OrderFactory', function($http){
       return res;
     })
   }
+
+  // when a user logs out, their cart should no longer show
+  orderObj.clearCart = function() {
+    return $http.put('api/orders/cart')
+    .then(res => {
+      return res;
+    });
+  }
+
   orderObj.removeFromOrder=function(product){
     // return $http.destroy or whatever it is
     return

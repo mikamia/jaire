@@ -24,6 +24,11 @@ router.get('/cart', function (req, res, next) {
     });
 })
 
+router.put('/cart', function (req, res, next) {
+  req.session.orderId = null;
+  res.sendStatus(205);
+})
+
 router.param('id', function (req, res, next, id) {
   Order.findById(id)
     .then(function (order) {
