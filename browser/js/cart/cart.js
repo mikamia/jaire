@@ -1,10 +1,4 @@
 app.controller('CartController', function($scope, CartFactory, $log, $state) {
-  CartFactory.getCurrOrderProds()
-  .then(products => {
-    $scope.order = products;
-  })
-  .catch($log.error);
-
   $scope.checkout = function() {
     CartFactory.checkout()
     .then(function() {

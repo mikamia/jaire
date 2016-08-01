@@ -9,10 +9,10 @@ app.config(function($stateProvider) {
 
 app.controller('PaymentCtrl', function($scope, PaymentFactory, $state, $log) {
   $scope.sendPayment = function() {
-    console.log($scope.payment);
-    PaymentFactory.addPayment($scope.payment)
-    .then(function(payment) {
-      $state.go('reviewOrder')
+    PaymentFactory.addAddress($scope.shipping, $scope.billing)
+    .then(function() {
+      console.log('I\'m here!')
+      $state.go('reviewOrder');
     })
     .catch($log.error);
   }
@@ -40,13 +40,6 @@ app.controller('PaymentCtrl', function($scope, PaymentFactory, $state, $log) {
   })
   .catch($log.error);
 
-  PaymentFactory.getOrderProducts()
-  .then(function(order) {
-    $scope.orderProducts = order;
-  })
-  .catch($log.error);
-
-
   $scope.states = ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 'Delaware', 'Florida', 'Georgia', 'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana', 'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey', 'New Mexico', 'New York', 'North Carolina', 'North Dakota', 'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania', 'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming', 'District of Columbia', 'American Samoa', 'Federated States of Micronesia', 'Guam', 'Marshall Islands', 'Northern Mariana Islands', 'Palau', 'Puerto Rico', 'Virgin Islands', 'Armed Forced Americas', 'Armed Forces Africa', 'Armed Forces Canada', 'Armed Forces Europe', 'Armed Forces Middle East', 'Armed Forces Pacific']
 
 });
@@ -54,21 +47,18 @@ app.controller('PaymentCtrl', function($scope, PaymentFactory, $state, $log) {
 app.factory('PaymentFactory', function($http, $state, $log) {
   var obj = {};
 
-  obj.addPayment = function(data) {
-    console.log('addPayment data', data);
-    return $http.post('/api/addresses', data)
-      .catch($log.error);
+  obj.addAddress = function(shipping, billing) {
+    return $http.post('/api/addresses', shipping)
+    .then(function() {
+      return $http.post('/api/addresses', billing)
+    })
+    .then(function (res) {
+      return res;
+    });
   };
 
   obj.getCurrOrder = function() {
     return $http.get('/api/orders/checkout')
-    .then(function(res) {
-      return res.data;
-    });
-  }
-
-  obj.getOrderProducts = function() {
-    return $http.get('/api/orders/cart')
     .then(function(res) {
       return res.data;
     });
