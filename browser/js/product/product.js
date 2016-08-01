@@ -142,6 +142,24 @@ app.factory('OrderFactory', function($http){
       return res;
     })
   }
+
+  // when a user logs out, their cart should no longer show
+  orderObj.clearCart = function() {
+    return $http.delete('api/orders/cart')
+    .then(res => {
+      return res;
+    });
+  }
+
+  // if a user starts as not logged in, when they log in or sign up their 
+  // cart should persist and be assigned their user id
+  orderObj.continueCart = function() {
+    return $http.put('api/orders/cart')
+    .then(res => {
+      return res;
+    });
+  }
+
   orderObj.removeFromOrder=function(product){
     // return $http.destroy or whatever it is
     return
