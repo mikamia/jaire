@@ -18,12 +18,13 @@ Product.belongsToMany(Order, {
   through: OrderProduct
 });
 
+Order.hasMany(Address);
+
 // product belongsToMany orders through a specific model with specific data e.g. through OrderProducts/LineItems
 // price at time of purchase
 // order belongsToMany products
 
-Address.hasMany(Order);
-Address.hasMany(User);
+User.hasMany(Address);
 
 //user has many orders
 User.hasMany(Order, {

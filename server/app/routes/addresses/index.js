@@ -1,6 +1,7 @@
 'use strict';
 var router = require('express').Router();
 var Address = require('../../../db/models/address');
+var Order = require('../../../db/models/order');
 module.exports = router;
 
 router.get('/unauth', function (req, res, next) {
@@ -37,12 +38,21 @@ router.get('/:id', function(req, res, next) {
 });
 
 router.post('/', function(req, res, next) {
-  Address.create(req.body)
+  Order.findById(req.session.orderId)
+  .then(function(order) {
+    return order;
+  })
+  .then(function(order) {
+    Address.create(req.body)
     .then(function(address) {
-      req.session.addressId = address.id;
-      res.send(address);
+      return order.addAddress(address);
+    })
+    .then(function() {
+      res.sendStatus(200);
     })
     .catch(next);
+  })
+  .catch(next);
 });
 
 router.put('/:id', function(req, res, next) {
