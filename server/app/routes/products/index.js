@@ -3,6 +3,8 @@ var router = require('express').Router();
 var Product = require('../../../db/models/product');
 module.exports = router;
 
+// Add authentication checks on routes for admins to update products
+// something like: if (req.isAuthenticated()) or req.user.isAdmin
 router.get('/', function(req, res, next) {
   Product.findAll({})
   .then(function(products) {
@@ -28,6 +30,7 @@ router.get('/:id', function(req, res, next) {
   res.json(req.product);
 });
 
+// Nice use of method
 router.get('/filter/:tag', function (req, res, next) {
   Product.findByTag(req.params.tag)
   .then(function(products) {

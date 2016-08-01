@@ -11,6 +11,7 @@ router.get('/', function(req, res, next) {
     .catch(next);
 });
 
+// Nice use of param!
 router.param('id', function(req, res, next, id) {
   Review.findById(id)
     .then(function(review) {

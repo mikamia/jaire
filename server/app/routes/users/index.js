@@ -4,11 +4,13 @@ var User = require('../../../db/models/user');
 module.exports = router;
 var _ = require('lodash');
 
+// add error handling
 router.get('/me', function(req, res, next) {
   console.log('req.user', req.user);
   res.json(req.user);
 })
 
+// add error handling
 router.get('/', function(req,res,next){
   User.findAll()
   .then(function(users){
@@ -16,6 +18,7 @@ router.get('/', function(req,res,next){
   });
 })
 
+// add error handling
 router.get('/:id', function(req,res,next){
   User.findById(req.params.id)
   .then(function(user){

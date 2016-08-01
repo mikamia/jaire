@@ -1,7 +1,7 @@
 app.controller('ProductsController', function($scope, ProductsFactory, $log) {
   $scope.currCategory = null;
   var allProducts = null;
-  
+
   function resetCategory() {
     $scope.currCategory = null;
     ProductsFactory.getAllProducts()
@@ -23,6 +23,7 @@ app.controller('ProductsController', function($scope, ProductsFactory, $log) {
     $scope.products = filterProduct;
   };
 
+  // Can use Angular Filters here, resolve all products on the state
   $scope.setCategory = function(tag) {
     $scope.currCategory = tag;
     console.log($scope.currCategory);
@@ -35,7 +36,7 @@ app.controller('ProductsController', function($scope, ProductsFactory, $log) {
       })
       .catch($log.error);
     }
-    
+
   };
 
   ProductsFactory.getAllTags()
@@ -60,6 +61,17 @@ app.factory('ProductsFactory', function($http) {
       })
   }
 
+// Can use Angular Filters for search and filter by category, this does not need to be done by making another $http request
+// https://docs.angularjs.org/api/ng/filter/filter
+// an example:
+// <label>Search: <input ng-model="searchText"></label>
+// <table id="searchTextResults">
+//   <tr><th>Name</th><th>Category</th></tr>
+//   <tr ng-repeat="product in products | filter:searchText">
+//     <td>{{product.name}}</td>
+//     <td>{{product.category}}</td>
+//   </tr>
+// </table>
   productsObj.getByTag = function (tag) {
     return $http.get('/api/products/filter/' + tag)
     .then(function(res) {
@@ -82,7 +94,7 @@ app.factory('ProductsFactory', function($http) {
   return productsObj;
 });
 
-
+// resolve products on state then filter them on the frontend
 app.config(function ($stateProvider) {
 
     $stateProvider.state('products', {
