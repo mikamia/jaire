@@ -7,13 +7,19 @@ app.config(function($stateProvider) {
   });
 });
 
-app.controller('SignupCtrl', function($scope, AuthFactory, $state, AuthService) {
+app.controller('SignupCtrl', function($scope, AuthFactory, OrderFactory, $state, AuthService) {
   $scope.sendSignup = function(info) {
-    AuthFactory.signup($scope.signup);
-    return AuthService.login(info)
-      .then(function() {
-        $state.go('home');
-      })
+    AuthFactory.signup($scope.signup)
+    .then(function() {
+      return AuthService.login(info)
+    })
+    .then(function() {
+      // when someone signs up, their cart should be assigned their new userid
+      return OrderFactory.continueCart();
+    })
+    .then(function() {
+      $state.go('home');
+    });
   }
 
 

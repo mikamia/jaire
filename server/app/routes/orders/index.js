@@ -3,6 +3,7 @@ var router = require('express').Router();
 var Order = require('../../../db/models/order');
 var Product = require('../../../db/models/product');
 var OrderProduct = require('../../../db/models/order-products');
+var Promise = require("bluebird");
 module.exports = router;
 
 router.get('/', function (req, res, next) {
@@ -24,7 +25,62 @@ router.get('/cart', function (req, res, next) {
     });
 })
 
-router.put('/cart', function (req, res, next) {
+// this route is used to give a userId to a previously logged out person's cart
+// upon that person logging in
+router.put('/cart', function(req, res, next) {
+  Order.findById(req.session.orderId)
+  .then(function(order) {
+    if (!order) {
+      res.sendStatus(200);
+    } else {
+      // see if they have an active cart already, and if they do, merge
+      Order.findOne({
+        where: {
+          userId: req.user.id,
+          status: 'in cart'
+        }
+      })
+      .then(function (prevOrder) {
+        if (!prevOrder) {
+          order.update({
+            userId: req.user.id
+          })
+          .then(function () {
+            res.sendStatus(201);
+          })
+          .catch(next);
+        } else {
+          console.log('the previous order-------', prevOrder);
+          OrderProduct.findAll({
+            where: {
+              orderId: order.id
+            }
+          })
+          .then(function(orderProducts) {
+            console.log('the order products-------', orderProducts);
+            let updatePromises = orderProducts.map(function(orderProduct) {
+              orderProduct.orderId = prevOrder.id;
+              console.log('the prev order id is---------', prevOrder.id);
+              console.log('the order product is now-------', orderProduct);
+              return orderProduct.save();
+            });
+            console.log('the update promises--------', updatePromises);
+            Promise.all(updatePromises)
+            .then(function() {
+              return order.destroy();
+            })
+            .then(function() {
+              res.sendStatus(201);
+            })
+            .catch(next);
+          });
+        }
+      });
+    }
+  });
+})
+
+router.delete('/cart', function (req, res, next) {
   req.session.orderId = null;
   res.sendStatus(205);
 })
