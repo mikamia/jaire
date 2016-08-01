@@ -30,13 +30,15 @@ module.exports = db.define('orderproduct', {
           products.forEach(function(product) {
             sum += product.price * product.qty;
           });
+          sum = Math.round(sum * 100) / 100;
           return sum;
         })
     }
   },
   getterMethods: {
     totalPrice: function() {
-      return this.price * this.qty;
+      var total = this.price * this.qty;
+      return Math.round(total * 100) / 100;
     }
   }
 });
