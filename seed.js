@@ -88,6 +88,60 @@ var seedProducts = function(){
         price: '67.99',
         imageUrl: 'http://media.offexploring.co.uk/photos/dan-and-fay/photos/300710-Picture%2030072010%20011.jpg',
         tags: ["Premium", "Urban", "Water"],
+    }, {
+        name: 'Astoria Park',
+        description: 'Sea salt and lamb gyro',
+        price: '10.00',
+        imageUrl: 'http://www.clker.com/cliparts/0/3/1/4/1206565634731299434Anonymous_simple_weather_symbols_5.svg.hi.png',
+        tags: ["Queens", "Park", "Meat", "River"]
+    }, {
+        name: 'Gillette Castle',
+        description: 'It\'s elementary, my dear shopper',
+        price: '300.00',
+        imageUrl: 'http://l7.alamy.com/zooms/7db4a43c69a847ea89bc6a31d2a2903d/gillette-castle-state-park-east-haddam-connecticut-f9gpcb.jpg',
+        tags: ["Connecticut", 'Royalty', 'Sherlock', 'Rural']
+    }, {
+        name: 'Bobst Library during finals',
+        description: 'Depression, anxiety, with a hint of the constant fear of failure',
+        price: '999.99',
+        imageUrl: 'http://joelsandersarchitect.com/wp-content/uploads/2015/05/06-NYU-Bobst-Library-1334x712.jpg',
+        tags: ['Manhattan', 'NYU', 'Academia', 'Premium']
+    }, {
+        name: 'MoMA',
+        description: 'Pretension, smarm, and cubism',
+        price: '5,000',
+        imageUrl: 'http://www.moma.org/explore/inside_out/inside_out/wp-content/uploads/2016/02/hassabi_plastic_3.jpg',
+        tags: ['Manhattan', 'Art', 'Artisan', 'Premium']
+    }, {
+        name: 'Catskill State Park',
+        description: 'The majesty of nature in a bottle',
+        price: '40',
+        imageUrl: 'http://www.cityprofile.com/forum/attachments/new-york/19933-catskill-catskills-state-park.jpg',
+        tags: ['Rural', 'Nature', 'Upstate NY', 'Water']
+    }, {
+        name: 'Coney Island',
+        description: 'Step right up and breathe in sweaty tourists and oysters',
+        price: '20',
+        imageUrl: 'http://www.newyork.com/articles/wp-content/uploads/2013/05/coney-island_650_20130530.jpg',
+        tags: ['Hot dogs', 'Water', 'Roller coasters', 'Urban']
+    }, {
+        name: 'Princeton',
+        description: 'Elitism, polo shirts, and ivy',
+        price: '1999.99',
+        imageUrl: 'https://www.runpacers.com/wp/wp-content/uploads/2015/11/Princeton-5.jpg',
+        tags: ['Academia', 'Rural', 'New Jersey', 'Premium']
+    }, {
+        name: 'Atlantic City',
+        description: 'High rollers and boardwalks',
+        price: '199.99',
+        imageUrl: 'https://urcomped.com/content/images/regions/Atlantic_jumbo.jpg',
+        tags: ['Water', 'New Jersey', 'Lucky', 'Urban']
+    }, {
+        name: 'Lobster Landing',
+        description: 'Brine, lemon, butter, and sea breeze',
+        price: '14.99',
+        imageUrl: 'https://s3-media3.fl.yelpcdn.com/bphoto/wk7SNfRmrcDjHLEaUtBGtA/ls.jpg',
+        tags: ['Water', 'Connecticut', 'Seafood', 'Nature', 'Rural', 'Premium']
     }
 
     ];

@@ -19,17 +19,22 @@
         </div>
         <div class='col-xs-10'>
             <h3>&nbsp;&nbsp;Products</h3>
-            <div ng-repeat="product in products" class="col-xs-3">
-                <div class="thumbnail">
-                    <a ui-sref="product({id: product.id})"><img ng-src="{{ product.imageUrl }}"></a>
-                    <div class="caption">
-                        <h5><a ui-sref="product({id: product.id})">{{ product.name }}</a></h5>
-                        <span>{{ product.price | currency }}</span>
-                        <br>
-                        <small><i>{{ product.description }}</i></small>
-                        <ul class="list-inline">
-                            <li ng-repeat="tag in product.tags" ng-click="setCategory(tag)"><a href="#">{{tag}}</a></li>
-                        </ul>
+            <div class="row">
+                <div ng-repeat="product in products">
+                    <div class="clearfix" ng-if="$index % 3 == 0"></div>
+                    <div class="col-sm-4">
+                        <div class="thumbnail">
+                            <a ui-sref="product({id: product.id})"><img ng-src="{{ product.imageUrl }}"></a>
+                            <div class="caption">
+                                <h5><a ui-sref="product({id: product.id})">{{ product.name }}</a></h5>
+                                <span>{{ product.price | currency }}</span>
+                                <br>
+                                <small><i>{{ product.description }}</i></small>
+                                <ul class="list-inline">
+                                    <li ng-repeat="tag in product.tags" ng-click="setCategory(tag)"><a href="#">{{tag}}</a></li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
