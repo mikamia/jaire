@@ -85,6 +85,14 @@ router.put('/checkout', function (req, res, next) {
   .catch(next);
 })
 
+router.get('/checkout', function(req, res, next) {
+  Order.findById(req.session.orderId)
+  .then(function(order) {
+    res.status(200).send(order);
+  })
+  .catch(next);
+})
+
 router.param('id', function (req, res, next, id) {
   Order.findById(id)
     .then(function (order) {
