@@ -6,24 +6,9 @@
   </div>
   <div>
     <div class="col-xs-8">
-      <div class="well well-lg">
-        <table class="table table-hover">
-          <thead>
-            <tr>
-              <th>Item</th>
-              <th>Qty</th>
-              <th>Price</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr ng-repeat="product in order">
-              <td>{{ product.name }}</td>
-              <td>{{ product.qty }}</td>
-              <td>${{ product.totalPrice }}</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+      <order-table></order-table>
+      <button class="btn btn-primary pull-right" ng-click="checkout()">Proceed to Checkout</button>
+      <div class="clearfix"></div>
     </div>
   </div>
 </div>
