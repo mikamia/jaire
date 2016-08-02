@@ -1,13 +1,37 @@
-SOME HTML HERE:
+<div class="container">
+  <div class="col-xs-9">
+    <h1>Your order is confirmed!</h1>
+    <p>Your confirmation number is # {{confirmNumber}}</p>
+    <div id="shipping">
+      <h1>{{shipping.type | uppercase}}</h1>
+      <p>{{shipping.name}}</p>
+      <p>{{shipping.streetAddress}}</p>
+      <p>{{shipping.streetAddress2}}</p>
+      <p>{{shipping.city}}</p>
+      <p>{{shipping.state}}</p>
+      <p>{{shipping.zip}}</p>
+      <hr>
+      <h1>{{billing.type | uppercase}}</h1>
+      <p>{{billing.name}}</p>
+      <p>{{billing.streetAddress}}</p>
+      <p>{{billing.streetAddress2}}</p>
+      <p>{{billing.city}}</p>
+      <p>{{billing.state}}</p>
+      <p>{{billing.zip}}</p>
+    </div>
+    <div id="billing">
 
-products in cart/order
-total price
-shipping address
-billing info
+    </div>
+  </div>
+  <div class="col-xs-3">
+    <order-table order-id="orderId"></order-table>
+    <form ng-submit="continueShopping()">
+      <button type="submit" class="btn btn-success">Continue Shopping</button>
+    </form>
+  </div>
+</div>
 
 
-confirmation message
 
-<form ng-submit="continueShopping()">
-  <button type="submit" class="btn btn-default">Continue Shopping</button>
-</form>
+
+

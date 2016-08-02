@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 app.controller('CartController', function($scope, CartFactory, OrderFactory, $log, $state) {
   $scope.checkout = function() {
     CartFactory.checkout()
@@ -6,6 +7,11 @@ app.controller('CartController', function($scope, CartFactory, OrderFactory, $lo
     })
     .catch($log.error); 
   }
+=======
+app.controller('CartController', function($scope, CartFactory, $log, $state) {
+  
+
+>>>>>>> master
 });
 
 app.factory('CartFactory', function($http) {
@@ -16,6 +22,7 @@ app.factory('CartFactory', function($http) {
       return res.data;
     });
   }
+<<<<<<< HEAD
   cartF.getCurrOrder = function (){
     return $http.get('')
   }
@@ -25,6 +32,8 @@ app.factory('CartFactory', function($http) {
       return res;
     });
   }
+=======
+>>>>>>> master
   return cartF;
 });
 

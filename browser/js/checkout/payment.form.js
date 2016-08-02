@@ -9,6 +9,9 @@ app.config(function($stateProvider) {
 
 app.controller('PaymentCtrl', function($scope, PaymentFactory, $state, $log) {
   $scope.sendPayment = function() {
+    $scope.shipping.type = 'shipping';
+    $scope.billing.type = 'billing';
+    $scope.billing.name = $scope.shipping.name;
     PaymentFactory.addAddress($scope.shipping, $scope.billing)
     .then(function() {
       console.log('I\'m here!')
@@ -21,12 +24,13 @@ app.controller('PaymentCtrl', function($scope, PaymentFactory, $state, $log) {
 
   $scope.checkboxChange = function() {
     // console.log($scope.payment);
-    $scope.a = $scope.shipping.streetAddress;
+    $scope.billing = {};
+    $scope.billing.streetAddress = $scope.shipping.streetAddress;
     $scope.checked = true;
-    $scope.a2 = $scope.shipping.streetAddress2;
-    $scope.city = $scope.shipping.city;
-    $scope.state = $scope.shipping.state;
-    $scope.zip = $scope.shipping.zip;
+    $scope.billing.streetAddress2 = $scope.shipping.streetAddress2;
+    $scope.billing.city = $scope.shipping.city;
+    $scope.billing.state = $scope.shipping.state;
+    $scope.billing.zip = $scope.shipping.zip;
   };
 
   PaymentFactory.getCurrOrder()
