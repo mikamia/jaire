@@ -30,17 +30,14 @@ describe('Order Routes', function () {
 
         beforeEach(function () {
           var promise1 = Order.create({
-                //id: 001,
                 status: 'in cart'
             });
 
             var promise2 = Order.create({
-                //id: 002,
                 status: 'shipped'
             });
 
             var promise3 = Order.create({
-                //id: 003,
                 status: 'cancelled'
             });
 
