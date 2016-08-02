@@ -21,17 +21,12 @@ app.controller('PaymentCtrl', function($scope, PaymentFactory, $state, $log) {
 
   $scope.checkboxChange = function() {
     // console.log($scope.payment);
-    $scope.a = $scope.payment.streetAddress;
+    $scope.a = $scope.shipping.streetAddress;
     $scope.checked = true;
-    $scope.a2 = $scope.payment.streetAddress2;
-    $scope.city = $scope.payment.city;
-    $scope.state = $scope.payment.state;
-    $scope.zip = $scope.payment.zip;
-    if ($scope.sameAdd) {
-      $scope.sameAdd = false;
-    } else {
-      $scope.sameAdd = true;
-    }
+    $scope.a2 = $scope.shipping.streetAddress2;
+    $scope.city = $scope.shipping.city;
+    $scope.state = $scope.shipping.state;
+    $scope.zip = $scope.shipping.zip;
   };
 
   PaymentFactory.getCurrOrder()
