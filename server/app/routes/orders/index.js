@@ -80,6 +80,7 @@ router.put('/checkout', function(req, res, next) {
             })
         })
         .then(function() {
+            // req.session.orderId = null;
             res.sendStatus(201);
         })
         .catch(next);

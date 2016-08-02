@@ -1,31 +1,55 @@
 app.config(function ($stateProvider) {
+  
   $stateProvider.state('reviewOrder', {
     url: '/review-order',
     templateUrl: 'js/review-order/review-order-form.html',
-    controller: 'ReviewOrderCtrl'
+    controller: 'ReviewOrderCtrl',
+    resolve: {
+      shipping: function(ReviewOrderFactory) {
+        return ReviewOrderFactory.getShippingAdd();
+      },
+      billing: function(ReviewOrderFactory) {
+        return ReviewOrderFactory.getBillingAdd();        
+      }
+    }
   });
 });
 
-app.controller('ReviewOrderCtrl', function ($scope, $state, AddressFactory) {
+app.controller('ReviewOrderCtrl', function ($scope, $state, shipping, billing, ReviewOrderFactory) {
   $scope.confirm = function () {
-    $state.go('confirmationPage')
+    ReviewOrderFactory.confirm()
+    .then(function() {
+      $state.go('confirmationPage')
+    });
   }
 
-  AddressFactory.getAddress()
-  .then(function (address) {
-    $scope.address = address;
-  });
+  $scope.makeChanges = function() {
+    $state.go('')
+  }  
+  
+  $scope.shipping = shipping;
+  $scope.billing = billing;
 });
 
-app.factory('AddressFactory', function($http){
-  var obj = {};
-
-  obj.getAddress = function () {
-    return $http.get('/api/addresses/unauth')
-    .then(function (res) {
+app.factory('ReviewOrderFactory', function($http) {
+  var f = {};
+  f.getShippingAdd = function() {
+    return $http.get('/api/addresses/checkout/shipping')
+    .then(function(res) {
       return res.data;
     });
   };
-
-  return obj;
+  f.getBillingAdd = function() {
+    return $http.get('/api/addresses/checkout/billing')
+    .then(function(res) {
+      return res.data;
+    });
+  };
+  f.confirm = function () {
+    return $http.put('api/orders/checkout')
+    .then(function (res) {
+      return res;
+    });
+  }
+  return f;
 })
