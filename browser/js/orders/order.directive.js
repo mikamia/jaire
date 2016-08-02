@@ -1,12 +1,17 @@
-app.directive('orderTable', function(CartFactory, OrderFactory, $log) {
+app.directive('cartTable', function(CartFactory, OrderFactory, $log) {
   return {
     restrict: 'E',
     scope: {
       order: '='
     },
-    templateUrl: 'js/orders/order-table.template.html',
+    templateUrl: 'js/orders/cart-table.template.html',
     link: function(scope, element, attr) {
-      scope.updateOrderProduct = OrderFactory.updateQty;
+      scope.updateOrderProduct = function (orderId, productId, productQty, $index){ 
+        OrderFactory.updateQty(orderId, productId, productQty)
+        .then(function(product){
+          scope.orderProducts[$index]=product;
+        })
+      };
       if (!scope.order) {
         CartFactory.getCurrOrderProds()
         .then(products => {

@@ -142,15 +142,15 @@ app.factory('OrderFactory', function($http){
       return res;
     })
   }
-  orderObj.updateQty = function(orderId, product, productQty){
-    return $http.get('api/orders' + orderId)
-  .then(function(order){
-    return $http.put('api/orders/' + order.id + '/product/' + product.id, {
-      qty: productQty,
+  orderObj.updateQty = function(orderId, productId, productQty){
+    return $http.put('api/orders/' + orderId + '/' + productId, {
+      qty: productQty
     })
     .then(function(res){
-      return res;
+      console.log("RES DOT DATA@@", res.data)
+      return res.data;
     })
+
   }
   // when a user logs out, their cart should no longer show
   orderObj.clearCart = function() {
