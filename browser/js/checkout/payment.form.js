@@ -9,6 +9,9 @@ app.config(function($stateProvider) {
 
 app.controller('PaymentCtrl', function($scope, PaymentFactory, $state, $log) {
   $scope.sendPayment = function() {
+    $scope.shipping.type = 'shipping';
+    $scope.billing.type = 'billing';
+    $scope.billing.name = $scope.shipping.name;
     PaymentFactory.addAddress($scope.shipping, $scope.billing)
     .then(function() {
       console.log('I\'m here!')

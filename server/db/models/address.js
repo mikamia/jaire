@@ -24,7 +24,9 @@ module.exports = db.define('address', {
   zip: {
     type: Sequelize.STRING
   },
-
+  type: {
+    type: Sequelize.ENUM('shipping', 'billing')
+  }
 }, {
   instanceMethods: {
 
