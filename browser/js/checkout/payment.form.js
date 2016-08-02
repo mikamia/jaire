@@ -20,7 +20,7 @@ app.controller('PaymentCtrl', function($scope, PaymentFactory, $state, $log) {
   $scope.sameAdd = false;
 
   $scope.checkboxChange = function() {
-    // console.log($scope.payment);
+    //console.log($scope.payment);
     $scope.a = $scope.payment.streetAddress;
     $scope.checked = true;
     $scope.a2 = $scope.payment.streetAddress2;
