@@ -1,4 +1,4 @@
-app.directive('orderTable', function(CartFactory, $log) {
+app.directive('orderTable', function(CartFactory, OrderFactory, $log) {
   return {
     restrict: 'E',
     scope: {
@@ -6,6 +6,7 @@ app.directive('orderTable', function(CartFactory, $log) {
     },
     templateUrl: 'js/orders/order-table.template.html',
     link: function(scope, element, attr) {
+      scope.updateOrderProduct = OrderFactory.updateQty;
       if (!scope.order) {
         CartFactory.getCurrOrderProds()
         .then(products => {
@@ -13,7 +14,6 @@ app.directive('orderTable', function(CartFactory, $log) {
         })
         .catch($log.error);
       }
-      // else we will use the order id from the isolate scope
     }
   }
 });

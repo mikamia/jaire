@@ -33,7 +33,7 @@ module.exports = db.define('orderproduct', {
           sum = Math.round(sum * 100) / 100;
           return sum;
         })
-    }
+    },
   },
   getterMethods: {
     totalPrice: function() {

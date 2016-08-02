@@ -93,6 +93,21 @@ router.get('/checkout', function(req, res, next) {
   .catch(next);
 })
 
+router.put('/:id/product/:productId', function (req, res, next){
+  Order.findOne({
+    where: {
+      orderId: req.params.id,
+      productId: req.params.productId
+    }
+  })
+  .then(function(order){
+    return order.update(req.data)
+  })
+  .then(function(res){
+    console.log("here's some res ", res)
+  })
+})
+
 router.param('id', function (req, res, next, id) {
   Order.findById(id)
     .then(function (order) {
