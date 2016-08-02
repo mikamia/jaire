@@ -1,11 +1,5 @@
 app.controller('CartController', function($scope, CartFactory, $log, $state) {
-  $scope.checkout = function() {
-    CartFactory.checkout()
-    .then(function() {
-      $state.go('checkout');
-    })
-    .catch($log.error); 
-  }
+  
 
 });
 
@@ -15,12 +9,6 @@ app.factory('CartFactory', function($http) {
     return $http.get('/api/orders/cart')
     .then(function(res) {
       return res.data;
-    });
-  }
-  cartF.checkout = function () {
-    return $http.put('api/orders/checkout')
-    .then(function (res) {
-      return res;
     });
   }
   return cartF;

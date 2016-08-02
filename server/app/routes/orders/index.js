@@ -25,6 +25,17 @@ router.get('/cart', function(req, res, next) {
         });
 })
 
+router.get('/order-products/:id', function(req, res, next) {
+    OrderProduct.findAll({
+            where: {
+                orderId: req.params.id
+            }
+        })
+        .then(products => {
+            res.send(products);
+        });
+})
+
 // this route is used to give a userId to a previously logged out person's cart
 // upon that person logging in
 router.put('/cart', function(req, res, next) {
@@ -80,9 +91,16 @@ router.put('/checkout', function(req, res, next) {
             })
         })
         .then(function() {
+            req.session.confirmedOrderId = req.session.orderId;
+            req.session.orderId = null;
             res.sendStatus(201);
         })
         .catch(next);
+})
+
+router.get('/confirmed-order-id', function (req, res, next) {
+    let id = req.session.confirmedOrderId;
+    res.status(200).json(id);
 })
 
 router.get('/checkout', function(req, res, next) {

@@ -1,19 +1,34 @@
-app.directive('orderTable', function(CartFactory, $log) {
+app.directive('orderTable', function(CartFactory, OrderTableFactory, $log) {
   return {
     restrict: 'E',
     scope: {
-      order: '='
+      orderId: '='
     },
     templateUrl: 'js/orders/order-table.template.html',
     link: function(scope, element, attr) {
-      if (!scope.order) {
+      if (!scope.orderId) {
         CartFactory.getCurrOrderProds()
         .then(products => {
           scope.orderProducts = products;
         })
         .catch($log.error);
+      } else {
+        OrderTableFactory.getOrderProducts(scope.orderId)
+        .then(products => {
+          scope.orderProducts = products;
+        })
+        .catch($log.error);
       }
-      // else we will use the order id from the isolate scope
     }
   }
+});
+
+app.factory('OrderTableFactory', function($http) {
+  let f = {};
+  f.getOrderProducts = function(id) {
+    console.log('the id that i\'m sengind to the routes', id);
+    return $http.get('/api/orders/order-products/' + id)
+    .then(res => res.data);
+  };
+  return f;
 });

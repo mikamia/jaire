@@ -1,30 +1,32 @@
-<div class="container" id="review-order">
-  <div class="container">
-    <h4>Review Your Order</h4>
+<div class="container">
+  <div class="col-xs-9">
+    <button class="btn btn-warning" ui-sref="checkout"><i class="glyphicon glyphicon-arrow-left"></i> Make changes</button>
+    <div id="shipping">
+      <h1>{{shipping.type | uppercase}}</h1>
+      <p>{{shipping.name}}</p>
+      <p>{{shipping.streetAddress}}</p>
+      <p>{{shipping.streetAddress2}}</p>
+      <p>{{shipping.city}}</p>
+      <p>{{shipping.state}}</p>
+      <p>{{shipping.zip}}</p>
+      <hr>
+      <h1>{{billing.type | uppercase}}</h1>
+      <p>{{billing.name}}</p>
+      <p>{{billing.streetAddress}}</p>
+      <p>{{billing.streetAddress2}}</p>
+      <p>{{billing.city}}</p>
+      <p>{{billing.state}}</p>
+      <p>{{billing.zip}}</p>
+    </div>
+    <div id="billing">
+
+    </div>
+  </div>
+  <div class="col-xs-3">
+    <order-table></order-table>
+    <form ng-submit="confirm()">
+      <button class="btn btn-success pull-right" type="submit" class="btn btn-default">Confirm Order</button>
+    </form>
   </div>
 
-  <div class="container">
-    <h3>Cart:</h3>
-  </div>
-
-  <div class="container">
-    <h3>Total Price:</h3>
-  </div>
-
-  <div class="container">
-    <h3>Shipping Address: </h3>
-    <h5>{{ address.name }}</h5>
-    <h5>{{ address.streetAddress }}</h5>
-    <h5>{{ address.streetAddress2 }}</h5>
-    <h5>{{ address.city }}</h5>
-    <h5>{{ address.state }}</h5>
-    <h5>{{ address.zip }}</h5>
-  </div>
-
-  <div class="container">
-
-  </div>
-  <form ng-submit="confirm()">
-    <button type="submit" class="btn btn-default">Confirm Order</button>
-  </form>
 </div>
