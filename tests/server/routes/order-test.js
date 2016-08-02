@@ -4,7 +4,7 @@ var expect = require('chai').expect;
 var Sequelize = require('sequelize');
 var db = require('../../../server/db');
 var supertest = require('supertest');
-var session = require('supertest-session');
+//var session = require('supertest-session');
 
 describe('Order Routes', function () {
 
@@ -21,7 +21,7 @@ describe('Order Routes', function () {
         Product = db.model('product');
         OrderProduct = db.model('orderproduct');
         agent = supertest.agent(app);
-        testSession = session(app);
+        //testSession = session(app);
     });
 
     xdescribe('CRUD orders', function () {
