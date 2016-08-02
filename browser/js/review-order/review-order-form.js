@@ -15,12 +15,16 @@ app.config(function ($stateProvider) {
   });
 });
 
-app.controller('ReviewOrderCtrl', function ($scope, $state, shipping, billing, ReviewOrderFactory) {
+app.controller('ReviewOrderCtrl', function ($scope, $log, $state, shipping, billing, ReviewOrderFactory) {
   $scope.confirm = function () {
     ReviewOrderFactory.confirm()
-    .then(function() {
-      $state.go('confirmationPage')
-    });
+    .then(function(res) {
+      return res;
+    })
+    .then(function(){
+      $state.go('confirmationPage');
+    })
+    .catch($log.error);
   }
 
   $scope.makeChanges = function() {
