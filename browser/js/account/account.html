@@ -1,16 +1,37 @@
-<form id="account-form" name="accountForm" ng-submit="accountForm.$valid && sendaccount(account)">
-
-    <alert type="danger" ng-show="error">
-        {{ error }}
-    </alert>
-
-    <div class="form-group">
-        <label for="email">Email address</label>
-        <input type="text" ng-model="account.email" class="form-control" id="email" placeholder="Enter email">
+<div class="container" id="account">
+    <h2>Your Account</h2>
+    <hr>
+    <div class="col-xs-12">
+        <h3>Orders</h3>
+        <h5><i>View Recent Orders</i></h5>
+        <h4>{{ orders }}</h4>
     </div>
-    <div class="form-group">
-        <label for="account-password">Password</label>
-        <input type="password" ng-model="account.password" class="form-control" id="account-password" placeholder="Password">
+    <div class="col-xs-12">
+        <h3>Settings</h3>
+        <h5><i>Name, Email, & Password</i></h5>
+        <h6>You can edit your information below</h6>
+        <br>
+        <form id="edit-account-form" name="updateForm">
+            <alert type="danger" ng-show="error">
+                {{ error }}
+            </alert>
+            <div class="form-group">
+                <label for="name">Current Name: {{ user.name }}</label>
+                <input type="text" ng-model="update.name" class="form-control" id="name" placeholder="New name">
+            </div>
+            <div class="form-group">
+                <label for="email">Current Email address: {{ user.email }}</label>
+                <input type="text" ng-model="update.email" class="form-control" id="email" placeholder="New email">
+            </div>
+            <div class="form-group">
+                <label for="update-password">Password: {{user.password}}</label>
+                <input type="password" ng-model="update.password" class="form-control" id="update-password" placeholder="New password">
+            </div>
+            <button type="submit" class="btn btn-default" ng-click="sendUpdate()">Submit</button>
+        </form>
+        <br>
+        <br>
+        <br>
     </div>
-    <button type="submit" class="btn btn-default">Submit</button>
-</form>
+    <br>
+</div>

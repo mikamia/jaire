@@ -4,11 +4,6 @@ var User = require('../../../db/models/user');
 module.exports = router;
 var _ = require('lodash');
 
-router.get('/me', function(req, res, next) {
-  console.log('req.user', req.user);
-  res.json(req.user);
-})
-
 router.get('/', function(req,res,next){
   User.findAll()
   .then(function(users){
@@ -30,6 +25,20 @@ router.post('/', function(req, res, next) {
     })
     .catch(next);
   // Do we want catch next or next()??
+});
+
+router.put('/:id', function(req, res, next) {
+  User.findById(req.params.id)
+  .then(function(user) {
+    return user.update(req.body)
+  })
+  .then(function() {
+    return User.findById(req.params.id)
+  })
+  .then(function(updatedUser) {
+    res.send(updatedUser);
+  })
+  .catch(next);
 });
 
 var ensureAuthenticated = function(req, res, next) {
