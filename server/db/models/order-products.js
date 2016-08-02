@@ -19,6 +19,8 @@ module.exports = db.define('orderproduct', {
   }
 }, {
   classMethods: {
+    //this returns a promise, can't do that because when we do res.send() it will stringify this promise making us not able to resolve it anymore because it'll just be a plain old string that looks like a promise
+
     getSum: function(orderId) {
       this.findAll({
         where: {
