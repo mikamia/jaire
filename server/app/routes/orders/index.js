@@ -149,7 +149,10 @@ router.post('/', function (req, res, next) {
 router.put('/:id', function (req, res, next) {
   req.order.update(req.body)
     .then(function () {
-      return Order.findById(req.params.id);
+      return Order.findById(req.params.id)
+    })
+    .then(updatedOrder=>{
+        res.send(updatedOrder);
     })
     .catch(next);
 })
