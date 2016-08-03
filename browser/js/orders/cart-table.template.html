@@ -10,14 +10,16 @@
       </tr>
     </thead>
     <tbody>
-      <tr ng-repeat="product in orderProducts track by $index">
-        <td><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></td>
+      <tr ng-repeat="product in orderProducts track by $index" ng-show="product.qty">
+        <td>
+                <span class="glyphicon glyphicon-remove" aria-hidden="true" ng-click="updateOrderProduct(product.orderId, product.productId, 0, $index)"></span>
+        </td>
         <td>{{ product.name }}</td>
-        <td>{{ product.qty }}</td>
+        <td ng>{{ product.qty }}</td>
         <td>${{ product.totalPrice }}</td>
         <td>
             <div class="form-group">
-                <select class="form-control" ng-model="productQty" id="select">
+                <select class="form-control" ng-model="productQty" id="select" default-value="0">
                     <option value="1">1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
@@ -36,7 +38,6 @@
             </button>
         </td>
       </tr>
-        <tr><td>Total:</td></tr>
     </tbody>
 
   </table>
