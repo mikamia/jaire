@@ -142,7 +142,16 @@ app.factory('OrderFactory', function($http){
       return res;
     })
   }
+  orderObj.updateQty = function(orderId, productId, productQty){
+    return $http.put('api/orders/' + orderId + '/' + productId, {
+      qty: productQty
+    })
+    .then(function(res){
+      console.log("RES DOT DATA@@", res.data)
+      return res.data;
+    })
 
+  }
   // when a user logs out, their cart should no longer show
   orderObj.clearCart = function() {
     return $http.delete('api/orders/cart')
@@ -164,15 +173,6 @@ app.factory('OrderFactory', function($http){
     // return $http.destroy or whatever it is
     return
   }
-
-  orderObj.updateQty=function(product){
-    //get order product and update qty field
-    return $http.put('api/orders/' + product.id, product)
-    .then(function(res){
-      return res.data
-    })
-  }
-  
   return orderObj;
 })
 
@@ -182,11 +182,7 @@ app.config(function ($stateProvider) {
         url: '/product/:id',
         templateUrl: 'js/product/product.html',
         controller: 'ProductController',
-        // resolve: {
-        //   updateReview: function(ProductFactory, $stateParams) {
-        //     return ProductFactory.create($stateParams.id);
-        //   }
-        // }
+
     });
 
 });

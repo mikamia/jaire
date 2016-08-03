@@ -111,17 +111,32 @@ router.get('/checkout', function(req, res, next) {
         .catch(next);
 })
 
-router.param('id', function(req, res, next, id) {
-    Order.findById(id)
-        .then(function(order) {
-            if (!order) {
-                throw new Error('not found!');
-            }
-            req.order = order;
-            next();
-            return null;
-        })
-        .catch(next);
+// router.put('/:id/product/:productId', function (req, res, next){
+//   Order.findOne({
+//     where: {
+//       orderId: req.params.id,
+//       productId: req.params.productId
+//     }
+//   })
+//   .then(function(order){
+//     return order.update(req.data)
+//   })
+//   .then(function(res){
+//     console.log("here's some res ", res)
+//   })
+// })
+
+router.param('id', function (req, res, next, id) {
+  Order.findById(id)
+    .then(function (order) {
+      if (!order) {
+        throw new Error('not found!');
+      }
+      req.order = order;
+      next();
+      return null;
+    })
+    .catch(next);
 });
 
 router.get('/:id', function(req, res, next) {
@@ -174,6 +189,33 @@ router.put('/:id', function(req, res, next) {
         })
         .catch(next);
 })
+
+
+router.put('/:orderId/:productId', function(req, res, next) {
+    OrderProduct.findOne({
+        where: {
+            orderId: req.params.orderId,
+            productId: req.params.productId
+        }
+    })
+    .then(function(foundOrder){
+        console.log(req.body)
+        return foundOrder.update(req.body)
+    })
+    .then(function(){
+        return OrderProduct.findOne({
+            where: {
+                orderId: req.params.orderId,
+                productId: req.params.productId
+            }
+        })
+    })
+    .then(function(foundOrder){
+        res.send(foundOrder);
+    })
+})
+
+
 
 router.delete('/:id', function(req, res, next) {
     req.order.destroy()
