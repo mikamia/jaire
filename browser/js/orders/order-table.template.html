@@ -8,7 +8,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr ng-repeat="product in orderProducts">
+      <tr ng-repeat="product in orderProducts" ng-show="product.qty">
         <td>{{ product.name }}</td>
         <td>{{ product.qty }}</td>
         <td>${{ product.totalPrice }}</td>
