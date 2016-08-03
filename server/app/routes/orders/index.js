@@ -50,7 +50,7 @@ router.get('/order-products/:id', function(req, res, next) {
         .then(products => {
             res.send(products);
         });
-
+});
 
 // this route is used to give a userId to a previously logged out person's cart
 // upon that person logging in

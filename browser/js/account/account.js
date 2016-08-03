@@ -26,6 +26,13 @@ app.controller('AccountCtrl', function ($scope, AccountFactory, AuthService, Ord
     .then(function(loggedInUser) {
         $scope.user = loggedInUser;
         return loggedInUser.data;
+    })
+    .then(function() {
+        AccountFactory.getOrders($scope.user.id)
+        .then(function(orders) {
+            console.log('orders',orders);
+            $scope.orders = orders;
+        });
     });
 
     $scope.sendUpdate = function() {
@@ -35,14 +42,10 @@ app.controller('AccountCtrl', function ($scope, AccountFactory, AuthService, Ord
         });
     }
 
-    $scope.runGetOrders = function () {
-        console.log($scope.user.id);
-        AccountFactory.getOrders($scope.user.id)
-        .then(function(orders) {
-            console.log('orders',orders);
-            $scope.orders = orders;
-        });
-    };
+    // $scope.runGetOrders = function () {
+    //     console.log($scope.user.id);
+        
+    // };
 });
 
 app.config(function ($stateProvider) {
