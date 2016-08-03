@@ -78,7 +78,7 @@ app.factory('ProductsFactory', function($http) {
       return tags;
     });
   }
-
+  
   return productsObj;
 });
 

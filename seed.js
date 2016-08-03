@@ -218,27 +218,32 @@ var seedAddresses = function(){
         streetAddress: '7951 Essex Drive',
         city: 'Saint Charles',
         state: 'Illinois',
-        zip: '60174'      
+        zip: '60174',
+        type: 'shipping'      
     }, {
         streetAddress: '8513 South Chapel Lane',
         city: 'Elizabethton',
         state: 'Tennessee',
-        zip: '37643'      
+        zip: '37643',
+        type: 'shipping'      
     }, {
         streetAddress: '734 Lilac St.',
         city: 'Vista',
         state: 'California',
-        zip: '92083'
+        zip: '92083',
+        type: 'shipping'
     },{
         streetAddress: '15 N. Charles Avenue',
         city: 'Oak Lawn',
         state: 'Illinois',
-        zip: '60453'
+        zip: '60453',
+        type: 'shipping'
     },{
         streetAddress: '884 Gulf St.',
         city:'Braintree',
         state: 'Massachusetts',
-        zip: '02184' 
+        zip: '02184',
+        type: 'shipping' 
 }];
 
     var creatingAddresses = addresses.map(function(addressObj){

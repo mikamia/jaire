@@ -1,4 +1,4 @@
-app.controller('CartController', function($scope, CartFactory, $log, $state) {
+app.controller('CartController', function($scope, CartFactory, OrderFactory, $log, $state) {
   $scope.checkout = function() {
     CartFactory.checkout()
     .then(function() {
@@ -6,7 +6,6 @@ app.controller('CartController', function($scope, CartFactory, $log, $state) {
     })
     .catch($log.error); 
   }
-
 });
 
 app.factory('CartFactory', function($http) {
@@ -16,6 +15,9 @@ app.factory('CartFactory', function($http) {
     .then(function(res) {
       return res.data;
     });
+  }
+  cartF.getCurrOrder = function (){
+    return $http.get('')
   }
   cartF.checkout = function () {
     return $http.put('api/orders/checkout')
@@ -33,6 +35,3 @@ app.config(function($stateProvider) {
     controller: 'CartController'
   });
 });
-
-//go through and display every thing in the current cart (session id?)
-//

@@ -33,6 +33,58 @@ router.param('id', function(req, res, next, id) {
     .catch(next);
 });
 
+router.get('/checkout/shipping', function (req, res, next) {
+  Address.findOne({
+    where: {
+      orderId: req.session.orderId,
+      type: 'shipping'
+    }
+  })
+  .then(function (address) {
+    res.send(address);
+  })
+  .catch(next);
+})
+
+router.get('/checkout/billing', function (req, res, next) {
+  Address.findOne({
+    where: {
+      orderId: req.session.orderId,
+      type: 'billing'
+    }
+  })
+  .then(function (address) {
+    res.send(address);
+  })
+  .catch(next);
+})
+
+router.get('/checkout/confirmed/billing', function (req, res, next) {
+  Address.findOne({
+    where: {
+      orderId: req.session.confirmedOrderId,
+      type: 'billing'
+    }
+  })
+  .then(function (address) {
+    res.send(address);
+  })
+  .catch(next);
+})
+
+router.get('/checkout/confirmed/shipping', function (req, res, next) {
+  Address.findOne({
+    where: {
+      orderId: req.session.confirmedOrderId,
+      type: 'shipping'
+    }
+  })
+  .then(function (address) {
+    res.send(address);
+  })
+  .catch(next);
+})
+
 router.get('/:id', function(req, res, next) {
   res.json(req.address);
 });
