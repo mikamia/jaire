@@ -33,7 +33,7 @@ app.controller('ProductController', function($scope, OrderFactory, AuthService, 
     .create($scope.newReview)
     .then(function(review) {
       console.log('review object', review);
-      $state.go('product')
+      $state.reload();
     })
     .catch(function(err) {
       $scope.hasSubmitted = false;

@@ -2,17 +2,17 @@ app.factory('AccountFactory', function($http) {
     var AcctFactoryObj = {};
 
     AcctFactoryObj.getOrders = function(id) {
-        return $http.get('/api/orders/' + id)
+        console.log('reached factory');
+        return $http.get('/api/orders/users/' + id)
         .then(function(res) {
+            console.log('res',res.data);
             return res.data;
         });
     }
 
     AcctFactoryObj.updateUser = function(id, updatedInfo) {
-        console.log('reached', id);
         return $http.put('/api/users/' + id, updatedInfo)
         .then(function(res) {
-            console.log('res.data', res);
             return res.data;
         });
     }
@@ -28,23 +28,21 @@ app.controller('AccountCtrl', function ($scope, AccountFactory, AuthService, Ord
         return loggedInUser.data;
     });
 
-    AccountFactory.getOrders()
-    .then(function(orders) {
-        $scope.orders = orders;
-    });
-
     $scope.sendUpdate = function() {
-        console.log('here');
-        console.log('scope.user',$scope.user);
         AccountFactory.updateUser($scope.user.id, $scope.update)
         .then(function() {
-            console.log('something');
             return AuthService.logout();
-        })
-        // .then(function() {
-        //     $state.go('login');
-        // })
+        });
     }
+
+    $scope.runGetOrders = function () {
+        console.log($scope.user.id);
+        AccountFactory.getOrders($scope.user.id)
+        .then(function(orders) {
+            console.log('orders',orders);
+            $scope.orders = orders;
+        });
+    };
 });
 
 app.config(function ($stateProvider) {
