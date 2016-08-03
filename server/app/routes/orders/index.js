@@ -14,6 +14,22 @@ router.get('/', function(req, res, next) {
         .catch(next);
 });
 
+router.get('/users/:userId', function (req, res, next) {
+  console.log('users/:userid router');
+  console.log('req.params.userid', req.params.userId);
+  Order.findAll({
+    where: {
+      userId: req.params.userId
+    }
+  })
+  .then(function (orders) {
+    console.log('ORDERS', orders);
+    res.send(orders);
+  })
+  .catch(next);
+});
+
+
 router.get('/cart', function(req, res, next) {
     OrderProduct.findAll({
             where: {
@@ -34,7 +50,7 @@ router.get('/order-products/:id', function(req, res, next) {
         .then(products => {
             res.send(products);
         });
-})
+});
 
 // this route is used to give a userId to a previously logged out person's cart
 // upon that person logging in

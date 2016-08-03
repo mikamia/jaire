@@ -19,7 +19,7 @@ app.controller('ProductController', function($scope, OrderFactory, AuthService, 
     else {
       $scope.loggedIn = true;
       user = loggedInUser;
-      console.log('authservice data', loggedInUser);
+      // console.log('authservice data', loggedInUser);
       return loggedInUser.data;
     }
   });
@@ -33,7 +33,7 @@ app.controller('ProductController', function($scope, OrderFactory, AuthService, 
     .create($scope.newReview)
     .then(function(review) {
       console.log('review object', review);
-      $state.go('product')
+      $state.reload();
     })
     .catch(function(err) {
       $scope.hasSubmitted = false;
