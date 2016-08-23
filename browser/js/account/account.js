@@ -16,7 +16,6 @@ app.factory('AccountFactory', function($http) {
             return res.data;
         });
     }
-
     return AcctFactoryObj;
 });
 
@@ -38,14 +37,10 @@ app.controller('AccountCtrl', function ($scope, AccountFactory, AuthService, Ord
     $scope.sendUpdate = function() {
         AccountFactory.updateUser($scope.user.id, $scope.update)
         .then(function() {
-            return AuthService.logout();
+            return $state.reload();
+            // return AuthService.logout();
         });
     }
-
-    // $scope.runGetOrders = function () {
-    //     console.log($scope.user.id);
-        
-    // };
 });
 
 app.config(function ($stateProvider) {
